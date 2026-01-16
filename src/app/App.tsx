@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { IntroSection } from './components/IntroSection';
-import { AboutSection } from './components/AboutSection';
+import { ValueProposition } from './components/ValueProposition';
 import { ServicesSection } from './components/ServicesSection';
+import { AboutSection } from './components/AboutSection';
 import { QualitySection } from './components/QualitySection';
 import { ClientsSection } from './components/ClientsSection';
 import { FAQSection } from './components/FAQSection';
@@ -45,14 +45,14 @@ export default function App() {
           <Hero onNavigate={handleNavigate} />
         </div>
         
-        <IntroSection onNavigate={handleNavigate} />
-        
-        <div ref={setSectionRef('nosotros')}>
-          <AboutSection />
-        </div>
+        <ValueProposition />
         
         <div ref={setSectionRef('servicios')}>
           <ServicesSection onNavigate={handleNavigate} />
+        </div>
+        
+        <div ref={setSectionRef('nosotros')}>
+          <AboutSection />
         </div>
         
         <div ref={setSectionRef('calidad')}>

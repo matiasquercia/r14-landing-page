@@ -1,40 +1,58 @@
 import { Button } from './Button';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import logoImg from "@/assets/a27ef8d2d8ee3a82ca53db10c8dd286a7009efee.png";
-import { useState, useEffect } from 'react';
+import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01_blanco.png";
+import { useRef, useEffect } from 'react';
 
 interface HeroProps {
   onNavigate: (section: string) => void;
 }
 
+// Video de fondo - Pexels (gratis para uso comercial)
+// Podés reemplazarlo por tu propio video en public/hero-video.mp4
+const HERO_VIDEO_URL = "https://videos.pexels.com/video-files/6169110/6169110-uhd_2560_1440_25fps.mp4";
+
+// Imagen de fallback mientras carga el video
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1592085198739-ffcad7f36b54?auto=format&fit=crop&w=1920&q=80";
+
 export function Hero({ onNavigate }: HeroProps) {
-  const [scrollY, setScrollY] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Asegurar que el video se reproduzca
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Algunos navegadores bloquean autoplay, ignorar el error
+      });
+    }
   }, []);
 
   return (
     <section className="relative h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          transform: `translateY(${scrollY * 0.5}px)`,
-          transition: 'transform 0.1s ease-out',
-        }}
-      >
-        <ImageWithFallback
-          src="https://images.unsplash.com/photo-1592085198739-ffcad7f36b54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb29kJTIwbG9naXN0aWNzJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc2Nzg4Nzg5N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-          alt="Logística alimentaria"
-          className="w-full h-[120%] object-cover"
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        {/* Fallback image (se muestra mientras carga el video) */}
+        <img 
+          src={FALLBACK_IMAGE}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-primary/70"></div>
+        
+        {/* Video */}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          poster={FALLBACK_IMAGE}
+        >
+          <source src={HERO_VIDEO_URL} type="video/mp4" />
+        </video>
+        
+        {/* Overlay oscuro */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/80"></div>
       </div>
 
       {/* Content */}
@@ -44,11 +62,11 @@ export function Hero({ onNavigate }: HeroProps) {
           alt="Real de Catorce Logo" 
           className="h-24 md:h-32 mx-auto mb-6 drop-shadow-2xl" 
         />
-        <h1 className="text-4xl md:text-6xl mb-4">Real de Catorce</h1>
-        <h2 className="text-2xl md:text-3xl mb-6 text-secondary">
+        <h1 className="text-4xl md:text-6xl mb-4 drop-shadow-lg">Real de Catorce</h1>
+        <h2 className="text-2xl md:text-3xl mb-6 text-secondary drop-shadow-md">
           Logística y abastecimiento alimentario para organizaciones públicas y empresas
         </h2>
-        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto drop-shadow">
           Calidad, seguridad y eficiencia en cada etapa del proceso
         </p>
         <Button 

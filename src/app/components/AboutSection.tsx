@@ -1,5 +1,6 @@
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Award, CheckCircle, Shield, Users, Zap, Heart } from 'lucide-react';
+import { SectionHeader } from './SectionHeader';
 
 export function AboutSection() {
   const values = [
@@ -14,11 +15,10 @@ export function AboutSection() {
   return (
     <section id="nosotros" className="py-20 bg-white scroll-mt-24">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl mb-4">
-            Experiencia, calidad y compromiso en logística alimentaria
-          </h2>
-        </div>
+        <SectionHeader
+          title="Experiencia, calidad y compromiso en logística alimentaria"
+          className="mb-12 md:mb-16"
+        />
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
@@ -61,7 +61,7 @@ export function AboutSection() {
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-center text-center p-6 bg-secondary/10 rounded-2xl hover:bg-secondary/20 hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
+                className="flex flex-col items-center text-center p-6 bg-secondary/10 rounded-2xl hover:bg-secondary/20 transition-colors duration-300 shadow-sm hover:shadow-md"
                 >
                   <Icon className="w-12 h-12 text-accent mb-3" />
                   <span className="text-sm font-medium">{value.label}</span>

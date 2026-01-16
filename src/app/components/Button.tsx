@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ children, variant = 'primary', size = 'md', className = '', ...props }: ButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center rounded-lg transition-all duration-200 font-medium';
+  const baseClasses = 'inline-flex items-center justify-center rounded-lg transition-all duration-200 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background';
   
   const variantClasses = {
     primary: 'bg-accent text-accent-foreground hover:bg-accent/90 shadow-md hover:shadow-lg',

@@ -1,6 +1,6 @@
 import { Mail, MapPin, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import logoImg from "@/assets/a27ef8d2d8ee3a82ca53db10c8dd286a7009efee.png";
+import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01.png";
 
 interface HeaderProps {
   onNavigate: (section: string) => void;
@@ -11,8 +11,8 @@ export function Header({ onNavigate }: HeaderProps) {
 
   const navItems = [
     { id: 'home', label: 'Inicio' },
-    { id: 'nosotros', label: 'Nosotros' },
     { id: 'servicios', label: 'Servicios' },
+    { id: 'nosotros', label: 'Nosotros' },
     { id: 'calidad', label: 'Calidad' },
     { id: 'clientes', label: 'Clientes' },
     { id: 'faq', label: 'FAQ' },

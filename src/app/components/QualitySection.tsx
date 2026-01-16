@@ -1,4 +1,5 @@
 import { ClipboardCheck, TrendingUp, FileCheck, Apple } from 'lucide-react';
+import { SectionHeader } from './SectionHeader';
 
 export function QualitySection() {
   const features = [
@@ -23,16 +24,11 @@ export function QualitySection() {
   return (
     <section id="calidad" className="py-20 bg-white scroll-mt-24">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl mb-6">
-            Compromiso con la calidad y la seguridad alimentaria
-          </h2>
-          <p className="text-lg max-w-3xl mx-auto">
-            Desde la selección de materias primas hasta la entrega final, trabajamos con procesos 
-            optimizados que garantizan altos estándares de calidad y seguridad alimentaria.
-          </p>
-        </div>
+        <SectionHeader
+          title="Compromiso con la calidad y la seguridad alimentaria"
+          subtitle="Desde la selección de materias primas hasta la entrega final, trabajamos con procesos optimizados que garantizan altos estándares de calidad y seguridad alimentaria."
+          className="mb-12 md:mb-16"
+        />
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -41,7 +37,7 @@ export function QualitySection() {
             return (
               <div
                 key={index}
-                className="flex flex-col items-center text-center p-8 bg-secondary/5 rounded-3xl hover:bg-secondary/10 hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-lg"
+                className="flex flex-col items-center text-center p-8 bg-secondary/5 rounded-2xl hover:bg-secondary/10 transition-colors duration-300 shadow-sm hover:shadow-lg"
               >
                 <div className="bg-accent/10 w-24 h-24 rounded-full flex items-center justify-center mb-5 shadow-md hover:shadow-accent/20 transition-shadow">
                   <Icon className="w-12 h-12 text-accent" />

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { SectionHeader } from './SectionHeader';
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -34,28 +35,24 @@ export function FAQSection() {
   return (
     <section id="faq" className="py-20 bg-white scroll-mt-24">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">
-            Preguntas frecuentes
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Respondemos las consultas más comunes sobre nuestros servicios
-          </p>
-        </div>
+        <SectionHeader
+          title="Preguntas frecuentes"
+          subtitle="Respondemos las consultas más comunes sobre nuestros servicios."
+          className="mb-12"
+        />
 
         {/* FAQ Accordion */}
         <div className="max-w-3xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-border rounded-lg overflow-hidden bg-card"
+              className="border border-border rounded-2xl overflow-hidden bg-card shadow-sm"
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex justify-between items-center p-6 text-left hover:bg-secondary/5 transition-colors"
               >
-                <h3 className="pr-8">{faq.question}</h3>
+                <h3 className="pr-8 text-base md:text-lg">{faq.question}</h3>
                 {openIndex === index ? (
                   <ChevronUp className="w-6 h-6 text-accent flex-shrink-0" />
                 ) : (

@@ -1,5 +1,6 @@
-import { Package, Truck, UtensilsCrossed } from 'lucide-react';
+import { Package, Truck, UtensilsCrossed, Check } from 'lucide-react';
 import { Button } from './Button';
+import { SectionHeader } from './SectionHeader';
 
 interface ServicesSectionProps {
   onNavigate: (section: string) => void;
@@ -14,9 +15,10 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         'Alimentos envasados',
         'Productos frescos',
         'Productos congelados',
-        'Eventos especiales. Catering',
+        'Catering para eventos',
       ],
       color: 'bg-accent',
+      lightColor: 'bg-accent/10',
     },
     {
       icon: Truck,
@@ -25,9 +27,10 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         'Reparto diario',
         'Optimización de rutas',
         'Cumplimiento de plazos',
-        'Adaptación a distintos volúmenes operativos',
+        'Volúmenes flexibles',
       ],
       color: 'bg-primary',
+      lightColor: 'bg-primary/10',
     },
     {
       icon: UtensilsCrossed,
@@ -35,45 +38,43 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
       items: [
         'Elaboración de viandas',
         'Enfoque nutricional',
-        'Frescura y calidad',
+        'Frescura garantizada',
         'Producción controlada',
       ],
       color: 'bg-secondary',
+      lightColor: 'bg-secondary/20',
     },
   ];
 
   return (
     <section id="servicios" className="py-20 bg-background scroll-mt-24">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl mb-6">
-            Soluciones de logística alimentaria adaptadas a cada necesidad
-          </h2>
-          <p className="text-lg max-w-3xl mx-auto">
-            En Real de Catorce ofrecemos servicios integrales de logística y abastecimiento alimentario, 
-            diseñados para responder a las exigencias del sector público y privado.
-          </p>
-        </div>
+        <SectionHeader
+          title="Soluciones de logística alimentaria adaptadas a cada necesidad"
+          subtitle="En Real de Catorce ofrecemos servicios integrales de logística y abastecimiento alimentario, diseñados para responder a las exigencias del sector público y privado."
+          className="mb-12 md:mb-16"
+        />
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={index}
-                className="bg-card border border-border rounded-3xl p-8 hover:shadow-2xl hover:scale-105 hover:border-accent/30 transition-all duration-300"
+                className="flex flex-col bg-card border border-border rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-lg hover:border-accent/30 transition-all duration-300"
               >
-                <div className={`${service.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-md`}>
-                  <Icon className="w-8 h-8 text-white" />
+                <div className={`${service.color} w-14 h-14 rounded-xl flex items-center justify-center mb-5 shadow-md`}>
+                  <Icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="mb-6">{service.title}</h3>
-                <ul className="space-y-3">
+                <h3 className="mb-4 text-lg">{service.title}</h3>
+                <ul className="space-y-2 flex-grow">
                   {service.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="text-accent mt-1 text-xl">●</span>
-                      <span>{item}</span>
+                    <li key={idx} className="flex items-center gap-2.5">
+                      <span className={`${service.lightColor} w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0`}>
+                        <Check className="w-3 h-3 text-accent" />
+                      </span>
+                      <span className="text-sm text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>

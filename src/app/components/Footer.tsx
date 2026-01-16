@@ -1,5 +1,5 @@
 import { Mail, MapPin } from 'lucide-react';
-import logoImg from "@/assets/a27ef8d2d8ee3a82ca53db10c8dd286a7009efee.png";
+import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01_blanco.png";
 
 interface FooterProps {
   onNavigate: (section: string) => void;
@@ -14,7 +14,7 @@ export function Footer({ onNavigate }: FooterProps) {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <img src={logoImg} alt="Real de Catorce" className="h-12 mb-4 brightness-0 invert" />
+            <img src={logoImg} alt="Real de Catorce" className="h-12 mb-4" />
             <p className="text-secondary mb-2">
               Logística y abastecimiento alimentario
             </p>

@@ -1,6 +1,28 @@
-import { useState, FormEvent } from 'react';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { useState, FormEvent, useEffect, useRef } from 'react';
+import { Mail, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
+import { SectionHeader } from './SectionHeader';
+
+// Turnstile site key - usar key de prueba en desarrollo
+// En producción, reemplazar con tu site key de Cloudflare Turnstile
+const TURNSTILE_SITE_KEY = '1x00000000000000000000AA'; // Key de prueba (siempre pasa)
+
+declare global {
+  interface Window {
+    turnstile: {
+      render: (container: string | HTMLElement, options: {
+        sitekey: string;
+        callback: (token: string) => void;
+        'expired-callback'?: () => void;
+        'error-callback'?: () => void;
+        theme?: 'light' | 'dark' | 'auto';
+        size?: 'normal' | 'compact';
+      }) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
+}
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -10,15 +32,78 @@ export function ContactSection() {
     mensaje: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  useEffect(() => {
+    // Inicializar Turnstile cuando el componente se monta
+    const initTurnstile = () => {
+      if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
+        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token: string) => {
+            setTurnstileToken(token);
+            setError(null);
+          },
+          'expired-callback': () => {
+            setTurnstileToken(null);
+          },
+          'error-callback': () => {
+            setError('Error al verificar. Por favor, recargá la página.');
+          },
+          theme: 'light',
+          size: 'normal',
+        });
+      }
+    };
+
+    // Esperar a que Turnstile esté disponible
+    if (window.turnstile) {
+      initTurnstile();
+    } else {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          initTurnstile();
+          clearInterval(interval);
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [submitted]);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // En producción, aquí se enviaría el formulario
+    
+    if (!turnstileToken) {
+      setError('Por favor, completá la verificación de seguridad.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError(null);
+
+    // Simular envío del formulario
+    // En producción, aquí enviarías el formulario junto con el token
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    setIsSubmitting(false);
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ nombre: '', empresa: '', email: '', mensaje: '' });
-    }, 3000);
+  };
+
+  const handleNewMessage = () => {
+    setSubmitted(false);
+    setFormData({ nombre: '', empresa: '', email: '', mensaje: '' });
+    setTurnstileToken(null);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,42 +116,21 @@ export function ContactSection() {
   return (
     <section id="contacto" className="py-20 bg-background scroll-mt-24">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">
-            Contacto institucional
-          </h2>
-          <p className="text-lg max-w-2xl mx-auto">
-            Nuestro equipo está disponible para responder consultas y brindar información sobre nuestros servicios.
-          </p>
-        </div>
+        <SectionHeader
+          title="Contacto institucional"
+          subtitle="Nuestro equipo está disponible para responder consultas y brindar información sobre nuestros servicios."
+          className="mb-12"
+        />
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="space-y-8">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {/* Left Column: Contact Info + Maps */}
+          <div className="flex flex-col gap-6">
             <div>
-              <h3 className="mb-6 flex items-center gap-2">
-                <MapPin className="w-6 h-6 text-accent" />
-                Direcciones
-              </h3>
-              <div className="space-y-3 pl-8">
-                <p className="flex items-start gap-2">
-                  <span className="text-accent mt-1">●</span>
-                  <span>Ombú 1269, Burzaco, Buenos Aires</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className="text-accent mt-1">●</span>
-                  <span>Lugano 73, Lomas de Zamora, Buenos Aires</span>
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="mb-6 flex items-center gap-2">
+              <h3 className="mb-4 flex items-center gap-2">
                 <Mail className="w-6 h-6 text-accent" />
                 Contactanos
               </h3>
-              <div className="space-y-3 pl-8">
+              <div className="space-y-2 pl-8">
                 <p>
                   <a 
                     href="mailto:rrhh@realcatorce.com.ar" 
@@ -99,26 +163,70 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* Visual Info Card */}
-            <div className="bg-primary text-primary-foreground p-6 rounded-lg">
-              <p className="text-lg leading-relaxed">
-                Estamos comprometidos con brindar respuestas rápidas y soluciones efectivas 
-                a cada consulta que recibimos.
-              </p>
+            {/* Maps */}
+            <div className="flex flex-col flex-grow">
+              <h3 className="mb-4 flex items-center gap-2">
+                <MapPin className="w-6 h-6 text-accent" />
+                Nuestras ubicaciones
+              </h3>
+              <div className="flex flex-col gap-4 flex-grow">
+                {/* Mapa Burzaco */}
+                <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm flex-grow flex flex-col">
+                  <div className="bg-primary text-primary-foreground px-4 py-2">
+                    <p className="font-medium text-sm">Ombú 1269, Burzaco</p>
+                    <p className="text-xs text-secondary">Buenos Aires, Argentina</p>
+                  </div>
+                  <iframe
+                    title="Ubicación Burzaco"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.8888888888!2d-58.3917!3d-34.8278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2d6a7c000001%3A0x1!2sOmb%C3%BA%201269%2C%20Burzaco%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1"
+                    className="w-full flex-grow min-h-[100px]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+                {/* Mapa Lomas de Zamora */}
+                <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm flex-grow flex flex-col">
+                  <div className="bg-primary text-primary-foreground px-4 py-2">
+                    <p className="font-medium text-sm">Lugano 73, Lomas de Zamora</p>
+                    <p className="text-xs text-secondary">Buenos Aires, Argentina</p>
+                  </div>
+                  <iframe
+                    title="Ubicación Lomas de Zamora"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.8888888888!2d-58.4069!3d-34.7617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2d7b9c000001%3A0x1!2sLugano%2073%2C%20Lomas%20de%20Zamora%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1"
+                    className="w-full flex-grow min-h-[100px]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-card border border-border rounded-lg p-8">
+          {/* Right Column: Contact Form */}
+          <div className="flex flex-col bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <h3 className="mb-6">Enviar consulta</h3>
             
             {submitted ? (
-              <div className="bg-accent/10 text-accent border border-accent rounded-lg p-6 text-center">
-                <p className="text-lg font-medium">¡Mensaje enviado con éxito!</p>
-                <p className="mt-2">Nos pondremos en contacto a la brevedad.</p>
+              <div className="flex-grow flex flex-col items-center justify-center text-center p-6">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-[bounce_0.5s_ease-in-out]">
+                  <CheckCircle className="w-12 h-12 text-green-600" />
+                </div>
+                <h4 className="text-2xl font-semibold text-foreground mb-3">
+                  ¡Consulta enviada!
+                </h4>
+                <p className="text-muted-foreground mb-6 max-w-sm">
+                  Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá a la brevedad.
+                </p>
+                <Button 
+                  variant="outline" 
+                  onClick={handleNewMessage}
+                  className="mt-2"
+                >
+                  Enviar otra consulta
+                </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="flex flex-col flex-grow gap-5">
                 <div>
                   <label htmlFor="nombre" className="block mb-2">
                     Nombre *
@@ -130,7 +238,8 @@ export function ContactSection() {
                     value={formData.nombre}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                   />
                 </div>
 
@@ -144,7 +253,8 @@ export function ContactSection() {
                     name="empresa"
                     value={formData.empresa}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                   />
                 </div>
 
@@ -159,11 +269,12 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                   />
                 </div>
 
-                <div>
+                <div className="flex flex-col flex-grow">
                   <label htmlFor="mensaje" className="block mb-2">
                     Mensaje *
                   </label>
@@ -173,14 +284,42 @@ export function ContactSection() {
                     value={formData.mensaje}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none flex-grow min-h-[100px] disabled:opacity-50"
                   />
                 </div>
 
-                <Button type="submit" variant="primary" className="w-full">
-                  <Send className="w-5 h-5 mr-2" />
-                  Enviar consulta
+                {/* Cloudflare Turnstile */}
+                <div className="flex flex-col items-center gap-2">
+                  <div ref={turnstileRef} className="flex justify-center" />
+                  {error && (
+                    <p className="text-sm text-red-600 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {error}
+                    </p>
+                  )}
+                </div>
+
+                <Button 
+                  type="submit" 
+                  variant="primary" 
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin w-5 h-5 mr-2" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Enviar consulta
+                    </>
+                  )}
                 </Button>
               </form>
             )}
