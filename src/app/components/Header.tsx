@@ -29,8 +29,9 @@ export function Header({ onNavigate }: HeaderProps) {
       {/* Top bar */}
       <div className="bg-primary text-primary-foreground py-2">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
-            <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
+          <div className="flex justify-between items-center text-sm">
+            {/* Emails - izquierda */}
+            <div className="flex items-center gap-3 md:gap-4">
               <a href="mailto:rrhh@realcatorce.com.ar" className="flex items-center gap-1 hover:text-secondary transition-colors">
                 <Mail className="w-4 h-4" />
                 <span className="hidden sm:inline">rrhh@realcatorce.com.ar</span>
@@ -42,6 +43,7 @@ export function Header({ onNavigate }: HeaderProps) {
                 <span className="sm:hidden">Proveedores</span>
               </a>
             </div>
+            {/* Dirección + LinkedIn - derecha */}
             <div className="flex items-center gap-4">
               <div className="hidden lg:flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
