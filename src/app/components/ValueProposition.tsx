@@ -42,7 +42,7 @@ export function ValueProposition() {
             return (
               <div
                 key={index}
-                className="flex flex-col items-center text-center bg-card border border-border rounded-2xl p-6 shadow-sm"
+                className="flex flex-col items-center text-center bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-accent/30 transition-all duration-300"
               >
                 <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
                   <Icon className="w-7 h-7 text-accent" />
