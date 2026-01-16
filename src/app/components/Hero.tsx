@@ -61,8 +61,8 @@ export function Hero({ onNavigate }: HeroProps) {
           alt="Real de Catorce Logo" 
           className="h-24 md:h-32 mx-auto mb-6 drop-shadow-2xl" 
         />
-        <h1 className="text-4xl md:text-6xl mb-4 drop-shadow-lg">Real de Catorce</h1>
-        <h2 className="text-2xl md:text-3xl mb-6 text-secondary drop-shadow-md">
+        <h1 className="text-4xl md:text-6xl mb-10 drop-shadow-lg">Real de Catorce</h1>
+        <h2 className="text-2xl md:text-3xl mb-8 text-secondary drop-shadow-md">
           Logística y abastecimiento alimentario para organizaciones públicas y empresas
         </h2>
         <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto drop-shadow">
