@@ -6,9 +6,8 @@ interface HeroProps {
   onNavigate: (section: string) => void;
 }
 
-// Video de fondo - Pexels (gratis para uso comercial)
-// Podés reemplazarlo por tu propio video en public/hero-video.mp4
-const HERO_VIDEO_URL = "https://videos.pexels.com/video-files/6169110/6169110-uhd_2560_1440_25fps.mp4";
+// Video de fondo - Archivo local en public/hero-video.mp4
+const HERO_VIDEO_URL = "/hero-video.mp4";
 
 // Imagen de fallback mientras carga el video
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1592085198739-ffcad7f36b54?auto=format&fit=crop&w=1920&q=80";
