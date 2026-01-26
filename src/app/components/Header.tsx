@@ -1,6 +1,7 @@
 import { Mail, MapPin, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01.png";
+import logoImgWhite from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01_blanco.png";
 
 interface HeaderProps {
   onNavigate: (section: string) => void;
@@ -8,6 +9,20 @@ interface HeaderProps {
 
 export function Header({ onNavigate }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+      // Mostrar logo del header cuando el logo del Hero ya no es visible
+      setShowLogo(window.scrollY > 350);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { id: 'home', label: 'Inicio' },
@@ -25,7 +40,7 @@ export function Header({ onNavigate }: HeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
       {/* Top bar */}
       <div className="bg-primary text-primary-foreground py-2">
         <div className="container mx-auto px-4">
@@ -66,15 +81,19 @@ export function Header({ onNavigate }: HeaderProps) {
       </div>
 
       {/* Main navigation */}
-      <div className="bg-white">
+      <div className={`transition-all duration-300 ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
-            {/* Logo */}
+            {/* Logo - visible solo cuando el logo del Hero ya no se ve */}
             <button 
               onClick={() => handleNavClick('home')}
-              className="flex items-center"
+              className={`flex items-center transition-all duration-300 ${showLogo ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             >
-              <img src={logoImg} alt="Real de Catorce" className="h-12" />
+              <img 
+                src={isScrolled ? logoImg : logoImgWhite} 
+                alt="Real de Catorce" 
+                className="h-12" 
+              />
             </button>
 
             {/* Desktop Navigation */}
@@ -83,7 +102,11 @@ export function Header({ onNavigate }: HeaderProps) {
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className="text-foreground hover:text-accent transition-colors font-medium"
+                  className={`transition-colors font-medium ${
+                    isScrolled 
+                      ? 'text-foreground hover:text-accent' 
+                      : 'text-white hover:text-secondary'
+                  }`}
                 >
                   {item.label}
                 </button>
@@ -93,7 +116,11 @@ export function Header({ onNavigate }: HeaderProps) {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-foreground hover:text-accent transition-colors"
+              className={`lg:hidden p-2 transition-colors ${
+                isScrolled 
+                  ? 'text-foreground hover:text-accent' 
+                  : 'text-white hover:text-secondary'
+              }`}
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -102,13 +129,21 @@ export function Header({ onNavigate }: HeaderProps) {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <nav className="lg:hidden pb-4 border-t border-border">
+            <nav className={`lg:hidden pb-4 border-t ${
+              isScrolled 
+                ? 'border-border bg-white' 
+                : 'border-white/20 bg-primary/90'
+            }`}>
               <div className="flex flex-col gap-2 pt-4">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className="text-left py-2 px-4 text-foreground hover:text-accent hover:bg-secondary/10 transition-colors rounded font-medium"
+                    className={`text-left py-2 px-4 transition-colors rounded font-medium ${
+                      isScrolled 
+                        ? 'text-foreground hover:text-accent hover:bg-secondary/10' 
+                        : 'text-white hover:text-secondary hover:bg-white/10'
+                    }`}
                   >
                     {item.label}
                   </button>

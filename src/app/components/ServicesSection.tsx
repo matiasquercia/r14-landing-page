@@ -1,6 +1,7 @@
-import { Package, Truck, UtensilsCrossed, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface ServicesSectionProps {
   onNavigate: (section: string) => void;
@@ -9,7 +10,7 @@ interface ServicesSectionProps {
 export function ServicesSection({ onNavigate }: ServicesSectionProps) {
   const services = [
     {
-      icon: Package,
+      image: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80',
       title: 'Abastecimiento de alimentos',
       items: [
         'Alimentos envasados',
@@ -17,23 +18,9 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         'Productos congelados',
         'Catering para eventos',
       ],
-      color: 'bg-accent',
-      lightColor: 'bg-accent/10',
     },
     {
-      icon: Truck,
-      title: 'Logística y distribución',
-      items: [
-        'Reparto diario',
-        'Optimización de rutas',
-        'Cumplimiento de plazos',
-        'Volúmenes flexibles',
-      ],
-      color: 'bg-primary',
-      lightColor: 'bg-primary/10',
-    },
-    {
-      icon: UtensilsCrossed,
+      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
       title: 'Viandas alimenticias',
       items: [
         'Elaboración de viandas',
@@ -41,13 +28,21 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         'Frescura garantizada',
         'Producción controlada',
       ],
-      color: 'bg-secondary',
-      lightColor: 'bg-secondary/20',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+      title: 'Logística y distribución',
+      items: [
+        'Reparto diario',
+        'Optimización de rutas',
+        'Cumplimiento de plazos',
+        'Volúmenes flexibles',
+      ],
     },
   ];
 
   return (
-    <section id="servicios" className="py-20 bg-background scroll-mt-24">
+    <section id="servicios" className="py-20 bg-secondary/10 scroll-mt-24">
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Soluciones de logística alimentaria adaptadas a cada necesidad"
@@ -58,26 +53,35 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         {/* Services Grid */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {services.map((service, index) => {
-            const Icon = service.icon;
             return (
               <div
                 key={index}
-                className="flex flex-col bg-card border border-border rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-lg hover:border-accent/30 transition-all duration-300"
+                className="flex flex-col bg-white border border-primary/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
               >
-                <div className={`${service.color} w-14 h-14 rounded-xl flex items-center justify-center mb-5 shadow-md`}>
-                  <Icon className="w-7 h-7 text-white" />
+                {/* Service Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <ImageWithFallback
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-primary/40"></div>
+                  <h3 className="absolute bottom-4 left-4 right-4 text-lg text-white font-semibold drop-shadow-lg">{service.title}</h3>
                 </div>
-                <h3 className="mb-4 text-lg">{service.title}</h3>
-                <ul className="space-y-2 flex-grow">
-                  {service.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2.5">
-                      <span className={`${service.lightColor} w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0`}>
-                        <Check className="w-3 h-3 text-accent" />
-                      </span>
-                      <span className="text-sm text-muted-foreground">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                
+                {/* Content */}
+                <div className="p-6 flex-grow">
+                  <ul className="space-y-3">
+                    {service.items.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-3">
+                        <span className="bg-primary w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3.5 h-3.5 text-white" />
+                        </span>
+                        <span className="text-sm text-foreground font-medium">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             );
           })}

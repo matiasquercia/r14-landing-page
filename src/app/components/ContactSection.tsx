@@ -3,6 +3,9 @@ import { Mail, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
 
+// Imagen de fondo - oficina
+const BG_IMAGE = "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
+
 // Turnstile site key - usar key de prueba en desarrollo
 // En producción, reemplazar con tu site key de Cloudflare Turnstile
 const TURNSTILE_SITE_KEY = '1x00000000000000000000AA'; // Key de prueba (siempre pasa)
@@ -114,27 +117,35 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-20 bg-background scroll-mt-24">
-      <div className="container mx-auto px-4">
+    <section id="contacto" className="relative py-20 scroll-mt-24 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: `url(${BG_IMAGE})` }}
+      />
+      {/* Overlay oscuro */}
+      <div className="absolute inset-0 bg-primary/85" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title="Contacto institucional"
           subtitle="Nuestro equipo está disponible para responder consultas y brindar información sobre nuestros servicios."
-          className="mb-12"
+          className="mb-12 [&_h2]:text-white [&_p]:text-white/80"
         />
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Left Column: Contact Info + Maps */}
           <div className="flex flex-col gap-6">
-            <div>
-              <h3 className="mb-4 flex items-center gap-2">
-                <Mail className="w-6 h-6 text-accent" />
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-white">
+                <Mail className="w-5 h-5 text-secondary" />
                 Contactanos
               </h3>
               <div className="space-y-2 pl-8">
                 <p>
                   <a 
                     href="mailto:rrhh@realcatorce.com.ar" 
-                    className="text-accent hover:underline"
+                    className="text-secondary hover:text-secondary/80 hover:underline"
                   >
                     rrhh@realcatorce.com.ar
                   </a>
@@ -142,7 +153,7 @@ export function ContactSection() {
                 <p>
                   <a 
                     href="mailto:proveedores@realcatorce.com.ar" 
-                    className="text-accent hover:underline"
+                    className="text-secondary hover:text-secondary/80 hover:underline"
                   >
                     proveedores@realcatorce.com.ar
                   </a>
@@ -152,7 +163,7 @@ export function ContactSection() {
                     href="https://www.linkedin.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-accent hover:underline inline-flex items-center gap-2"
+                    className="text-secondary hover:text-secondary/80 hover:underline inline-flex items-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -164,17 +175,17 @@ export function ContactSection() {
             </div>
 
             {/* Maps */}
-            <div className="flex flex-col flex-grow">
-              <h3 className="mb-4 flex items-center gap-2">
-                <MapPin className="w-6 h-6 text-accent" />
+            <div className="flex flex-col flex-grow bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-white">
+                <MapPin className="w-5 h-5 text-secondary" />
                 Nuestras ubicaciones
               </h3>
               <div className="flex flex-col gap-4 flex-grow">
                 {/* Mapa Burzaco */}
-                <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm flex-grow flex flex-col">
-                  <div className="bg-primary text-primary-foreground px-4 py-2">
+                <div className="overflow-hidden rounded-lg border border-white/20 flex-grow flex flex-col">
+                  <div className="bg-secondary/30 text-white px-4 py-2">
                     <p className="font-medium text-sm">Ombú 1269, Burzaco</p>
-                    <p className="text-xs text-secondary">Buenos Aires, Argentina</p>
+                    <p className="text-xs text-white/70">Buenos Aires, Argentina</p>
                   </div>
                   <iframe
                     title="Ubicación Burzaco"
@@ -185,10 +196,10 @@ export function ContactSection() {
                   />
                 </div>
                 {/* Mapa Lomas de Zamora */}
-                <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm flex-grow flex flex-col">
-                  <div className="bg-primary text-primary-foreground px-4 py-2">
+                <div className="overflow-hidden rounded-lg border border-white/20 flex-grow flex flex-col">
+                  <div className="bg-secondary/30 text-white px-4 py-2">
                     <p className="font-medium text-sm">Lugano 73, Lomas de Zamora</p>
-                    <p className="text-xs text-secondary">Buenos Aires, Argentina</p>
+                    <p className="text-xs text-white/70">Buenos Aires, Argentina</p>
                   </div>
                   <iframe
                     title="Ubicación Lomas de Zamora"
@@ -203,22 +214,22 @@ export function ContactSection() {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="flex flex-col bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-            <h3 className="mb-6">Enviar consulta</h3>
+          <div className="flex flex-col bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 md:p-8">
+            <h3 className="mb-6 text-white">Enviar consulta</h3>
             
             {submitted ? (
               <div className="flex-grow flex flex-col items-center justify-center text-center p-6">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-[bounce_0.5s_ease-in-out]">
-                  <CheckCircle className="w-12 h-12 text-green-600" />
+                <div className="w-20 h-20 bg-secondary/30 rounded-full flex items-center justify-center mb-6 animate-[bounce_0.5s_ease-in-out]">
+                  <CheckCircle className="w-12 h-12 text-secondary" />
                 </div>
-                <h4 className="text-2xl font-semibold text-foreground mb-3">
+                <h4 className="text-2xl font-semibold text-white mb-3">
                   ¡Consulta enviada!
                 </h4>
-                <p className="text-muted-foreground mb-6 max-w-sm">
+                <p className="text-white/70 mb-6 max-w-sm">
                   Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá a la brevedad.
                 </p>
                 <Button 
-                  variant="outline" 
+                  variant="secondary" 
                   onClick={handleNewMessage}
                   className="mt-2"
                 >
@@ -228,7 +239,7 @@ export function ContactSection() {
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col flex-grow gap-5">
                 <div>
-                  <label htmlFor="nombre" className="block mb-2">
+                  <label htmlFor="nombre" className="block mb-2 text-white/90 text-sm">
                     Nombre *
                   </label>
                   <input
@@ -239,12 +250,12 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent disabled:opacity-50"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="empresa" className="block mb-2">
+                  <label htmlFor="empresa" className="block mb-2 text-white/90 text-sm">
                     Empresa
                   </label>
                   <input
@@ -254,12 +265,12 @@ export function ContactSection() {
                     value={formData.empresa}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent disabled:opacity-50"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block mb-2">
+                  <label htmlFor="email" className="block mb-2 text-white/90 text-sm">
                     Email *
                   </label>
                   <input
@@ -270,12 +281,12 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent disabled:opacity-50"
                   />
                 </div>
 
                 <div className="flex flex-col flex-grow">
-                  <label htmlFor="mensaje" className="block mb-2">
+                  <label htmlFor="mensaje" className="block mb-2 text-white/90 text-sm">
                     Mensaje *
                   </label>
                   <textarea
@@ -285,7 +296,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none flex-grow min-h-[100px] disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent resize-none flex-grow min-h-[100px] disabled:opacity-50"
                   />
                 </div>
 
@@ -293,7 +304,7 @@ export function ContactSection() {
                 <div className="flex flex-col items-center gap-2">
                   <div ref={turnstileRef} className="flex justify-center" />
                   {error && (
-                    <p className="text-sm text-red-600 flex items-center gap-1">
+                    <p className="text-sm text-red-400 flex items-center gap-1">
                       <AlertCircle className="w-4 h-4" />
                       {error}
                     </p>
@@ -302,7 +313,7 @@ export function ContactSection() {
 
                 <Button 
                   type="submit" 
-                  variant="primary" 
+                  variant="secondary" 
                   className="w-full"
                   disabled={isSubmitting}
                 >

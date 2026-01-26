@@ -40,11 +40,12 @@ export default function App() {
     <div className="min-h-screen bg-background">
       <Header onNavigate={handleNavigate} />
       
-      <main className="pt-[96px]">
-        <div ref={setSectionRef('home')}>
-          <Hero onNavigate={handleNavigate} />
-        </div>
-        
+      {/* Hero fuera del main para que quede debajo del header */}
+      <div ref={setSectionRef('home')}>
+        <Hero onNavigate={handleNavigate} />
+      </div>
+      
+      <main>
         <ValueProposition />
         
         <div ref={setSectionRef('servicios')}>

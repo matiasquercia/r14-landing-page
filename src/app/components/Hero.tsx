@@ -1,5 +1,5 @@
 import { Button } from './Button';
-import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01_blanco.png";
+import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_02_blanco.png";
 import { useRef, useEffect } from 'react';
 
 interface HeroProps {
@@ -25,7 +25,7 @@ export function Hero({ onNavigate }: HeroProps) {
   }, []);
 
   return (
-    <section className="relative h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[700px] md:h-[800px] flex items-center justify-center overflow-hidden pt-24">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         {/* Fallback image (se muestra mientras carga el video) */}
@@ -51,7 +51,10 @@ export function Hero({ onNavigate }: HeroProps) {
         </video>
         
         {/* Overlay oscuro */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/80"></div>
+        <div className="absolute inset-0 bg-primary/75"></div>
+        
+        {/* Difuminado inferior para fusión con siguiente sección */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent"></div>
       </div>
 
       {/* Content */}
@@ -59,14 +62,13 @@ export function Hero({ onNavigate }: HeroProps) {
         <img 
           src={logoImg} 
           alt="Real de Catorce Logo" 
-          className="h-24 md:h-32 mx-auto mb-6 drop-shadow-2xl" 
+          className="h-48 md:h-64 lg:h-72 mx-auto mb-10 drop-shadow-2xl" 
         />
-        <h1 className="text-4xl md:text-6xl mb-10 drop-shadow-lg">Real de Catorce</h1>
-        <h2 className="text-2xl md:text-3xl mb-8 text-secondary drop-shadow-md">
-          Logística y abastecimiento alimentario para organizaciones públicas y empresas
+        <h2 className="text-2xl md:text-3xl mb-8 text-secondary drop-shadow-md font-bold">
+          Logística y abastecimiento alimentario para organismos públicos y empresas.
         </h2>
         <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto drop-shadow">
-          Calidad, seguridad y eficiencia en cada etapa del proceso
+          <span className="font-bold">Calidad, seguridad y eficiencia</span> en cada etapa del proceso
         </p>
         <Button 
           variant="primary" 

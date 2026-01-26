@@ -1,6 +1,9 @@
 import { ClipboardCheck, TrendingUp, FileCheck, Apple } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 
+// Imagen de fondo - alimentos frescos
+const BG_IMAGE = "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1920&q=80";
+
 export function QualitySection() {
   const features = [
     {
@@ -22,42 +25,50 @@ export function QualitySection() {
   ];
 
   return (
-    <section id="calidad" className="py-20 bg-white scroll-mt-24">
-      <div className="container mx-auto px-4">
+    <section id="calidad" className="relative py-20 scroll-mt-24 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: `url(${BG_IMAGE})` }}
+      />
+      {/* Overlay oscuro */}
+      <div className="absolute inset-0 bg-primary/85" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title="Compromiso con la calidad y la seguridad alimentaria"
           subtitle="Desde la selección de materias primas hasta la entrega final, trabajamos con procesos optimizados que garantizan altos estándares de calidad y seguridad alimentaria."
-          className="mb-12 md:mb-16"
+          className="mb-12 md:mb-16 [&_h2]:text-white [&_p]:text-white/80"
         />
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={index}
-                className="flex flex-col items-center text-center p-8 bg-secondary/5 rounded-2xl hover:bg-secondary/10 transition-colors duration-300 shadow-sm hover:shadow-lg"
+                className="flex flex-col items-center text-center p-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl hover:bg-white/15 hover:border-white/30 transition-all duration-300"
               >
-                <div className="bg-accent/10 w-24 h-24 rounded-full flex items-center justify-center mb-5 shadow-md hover:shadow-accent/20 transition-shadow">
-                  <Icon className="w-12 h-12 text-accent" />
+                <div className="bg-secondary/30 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                  <Icon className="w-7 h-7 text-secondary" />
                 </div>
-                <p className="font-medium text-base">{feature.label}</p>
+                <p className="font-semibold text-sm text-white">{feature.label}</p>
               </div>
             );
           })}
         </div>
 
         {/* Highlighted Message */}
-        <div className="bg-gradient-to-br from-primary via-primary to-accent text-white p-12 md:p-14 rounded-3xl text-center shadow-xl">
-          <p className="text-2xl md:text-3xl font-medium leading-relaxed">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-10 md:p-12 rounded-2xl text-center">
+          <p className="text-xl md:text-2xl font-medium leading-relaxed text-white">
             La seguridad alimentaria es parte central de nuestra forma de trabajar.
           </p>
         </div>
 
         {/* Additional Info */}
-        <div className="mt-12 max-w-3xl mx-auto text-center">
-          <p className="text-lg leading-relaxed">
+        <div className="mt-10 max-w-3xl mx-auto text-center">
+          <p className="text-base leading-relaxed text-white/80">
             Nuestra gestión se apoya en controles rigurosos y procesos de mejora continua que 
             aseguran el cumplimiento de todas las normativas vigentes, manteniendo siempre el 
             foco en la nutrición, la frescura y la satisfacción de nuestros clientes.
