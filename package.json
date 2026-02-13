@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "echo 'Linting...'",
     "serve": "vite preview --port 4173",
-    "deploy": "npm run build && bash deploy-ftp.sh"
+    "deploy": "npm run build && sed -i 's/\\r$//' deploy-ftp.sh && bash deploy-ftp.sh"
   },
   "dependencies": {
     "react": "18.3.1",
