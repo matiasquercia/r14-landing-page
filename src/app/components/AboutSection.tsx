@@ -1,5 +1,5 @@
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { Award, CheckCircle, Shield, Users, Zap, Heart } from 'lucide-react';
+import { Award, CheckCircle, Shield, Users, Zap, Heart, Building2, GraduationCap, Briefcase } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 import { motion } from 'motion/react';
 
@@ -11,6 +11,24 @@ export function AboutSection() {
     { icon: Users, label: 'Adaptabilidad', color: 'accent' },
     { icon: Heart, label: 'Compromiso', color: 'secondary' },
     { icon: Shield, label: 'Seguridad alimentaria', color: 'tertiary' },
+  ];
+
+  const clientTypes = [
+    { 
+      icon: Building2, 
+      label: 'Organismos públicos',
+      color: 'accent'
+    },
+    { 
+      icon: GraduationCap, 
+      label: 'Instituciones educativas',
+      color: 'secondary'
+    },
+    { 
+      icon: Briefcase, 
+      label: 'Empresas privadas',
+      color: 'tertiary'
+    },
   ];
 
   const colorMap = {
@@ -50,7 +68,7 @@ export function AboutSection() {
               a una empresa de logística alimentaria consolidada.
             </p>
             <p className="text-lg md:text-xl leading-relaxed text-foreground/90 font-medium">
-              Hoy nos especializamos en el abastecimiento y reparto diario de alimentos para <span className="font-bold text-accent">organismos públicos, instituciones y empresas privadas</span>, gestionando procesos que combinan frescura, seguridad, puntualidad y eficiencia. Contamos con la capacidad operativa y flexibilidad para adaptarnos a las particularidades de cada cliente.
+              Hoy nos especializamos en el abastecimiento y reparto diario de alimentos para organismos públicos, instituciones y empresas privadas, gestionando procesos que combinan frescura, seguridad, puntualidad y eficiencia. Contamos con la capacidad operativa y flexibilidad para adaptarnos a las particularidades de cada cliente.
             </p>
           </motion.div>
           
@@ -136,6 +154,53 @@ export function AboutSection() {
                   </motion.div>
                   <span className="text-sm font-bold text-foreground uppercase tracking-wide">
                     {value.label}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Nuestros Clientes */}
+        <div className="mt-20">
+          <motion.h3
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
+          >
+            Trabajamos con distintos sectores
+          </motion.h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            {clientTypes.map((client, index) => {
+              const Icon = client.icon;
+              const colors = colorMap[client.color as keyof typeof colorMap];
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ y: 50, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.15,
+                    ease: [0.16, 1, 0.3, 1] 
+                  }}
+                  whileHover={{ y: -8, scale: 1.03 }}
+                  className={`flex flex-col items-center text-center p-8 bg-card/70 backdrop-blur-sm border ${colors.border} rounded-3xl hover:bg-card/90 transition-all duration-300 group`}
+                >
+                  <motion.div 
+                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                    className={`${colors.bg} w-20 h-20 rounded-2xl flex items-center justify-center mb-5 border-2 ${colors.border}`}
+                  >
+                    <Icon className={`w-10 h-10 ${colors.icon}`} />
+                  </motion.div>
+                  <span className="text-lg font-black text-foreground uppercase tracking-wide">
+                    {client.label}
                   </span>
                 </motion.div>
               );
