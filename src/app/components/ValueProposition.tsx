@@ -58,7 +58,7 @@ export function ValueProposition() {
   };
 
   return (
-    <section className="relative py-20 sm:py-24 md:py-32 overflow-hidden -mt-32 pt-32 sm:pt-40 md:pt-48">
+    <section className="relative py-20 sm:py-24 md:py-32 overflow-hidden -mt-24 pt-40 sm:pt-48 md:pt-56">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
