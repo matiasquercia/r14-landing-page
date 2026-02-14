@@ -1,31 +1,12 @@
-import { useState, FormEvent, useEffect, useRef } from 'react';
-import { Mail, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState, FormEvent } from 'react';
+import { Mail, MapPin, Send, CheckCircle, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
 
 // Imagen de fondo - oficina
 const BG_IMAGE = "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
 
-// Turnstile site key - usar key de prueba en desarrollo
-// En producción, reemplazar con tu site key de Cloudflare Turnstile
-const TURNSTILE_SITE_KEY = '1x00000000000000000000AA'; // Key de prueba (siempre pasa)
-
-declare global {
-  interface Window {
-    turnstile: {
-      render: (container: string | HTMLElement, options: {
-        sitekey: string;
-        callback: (token: string) => void;
-        'expired-callback'?: () => void;
-        'error-callback'?: () => void;
-        theme?: 'light' | 'dark' | 'auto';
-        size?: 'normal' | 'compact';
-      }) => string;
-      reset: (widgetId: string) => void;
-      remove: (widgetId: string) => void;
-    };
-  }
-}
+const FORMSUBMIT_EMAIL = 'admin@realdecatorce.com.ar';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -36,77 +17,58 @@ export function ContactSection() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const turnstileRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    // Inicializar Turnstile cuando el componente se monta
-    const initTurnstile = () => {
-      if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
-        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: TURNSTILE_SITE_KEY,
-          callback: (token: string) => {
-            setTurnstileToken(token);
-            setError(null);
-          },
-          'expired-callback': () => {
-            setTurnstileToken(null);
-          },
-          'error-callback': () => {
-            setError('Error al verificar. Por favor, recargá la página.');
-          },
-          theme: 'light',
-          size: 'normal',
-        });
-      }
-    };
-
-    // Esperar a que Turnstile esté disponible
-    if (window.turnstile) {
-      initTurnstile();
-    } else {
-      const interval = setInterval(() => {
-        if (window.turnstile) {
-          initTurnstile();
-          clearInterval(interval);
-        }
-      }, 100);
-      return () => clearInterval(interval);
-    }
-
-    return () => {
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.remove(widgetIdRef.current);
-        widgetIdRef.current = null;
-      }
-    };
-  }, [submitted]);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [humanCheck, setHumanCheck] = useState(false);
+  const [humanCheckError, setHumanCheckError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
-    if (!turnstileToken) {
-      setError('Por favor, completá la verificación de seguridad.');
+
+    // Honeypot: si se llenó, es un bot
+    if (honeypot) return;
+
+    if (!humanCheck) {
+      setHumanCheckError('Por favor confirmá que no sos un robot.');
       return;
     }
 
+    setHumanCheckError(null);
+    setSubmitError(null);
     setIsSubmitting(true);
-    setError(null);
 
-    // Simular envío del formulario
-    // En producción, aquí enviarías el formulario junto con el token
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `Consulta - ${formData.nombre || 'Contacto'}`,
+          _template: 'table',
+          _captcha: 'false',
+          nombre: formData.nombre,
+          empresa: formData.empresa,
+          email: formData.email,
+          mensaje: formData.mensaje,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setSubmitted(true);
+      if (!response.ok) {
+        throw new Error('No se pudo enviar el formulario');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Error al enviar el formulario:', err);
+      setSubmitError('No se pudo enviar el mensaje. Intentá de nuevo en unos minutos.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleNewMessage = () => {
     setSubmitted(false);
     setFormData({ nombre: '', empresa: '', email: '', mensaje: '' });
-    setTurnstileToken(null);
+    setHumanCheck(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -237,7 +199,7 @@ export function ContactSection() {
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col flex-grow gap-5">
+              <form onSubmit={handleSubmit} className="relative flex flex-col flex-grow gap-5">
                 <div>
                   <label htmlFor="nombre" className="block mb-2 text-white/90 text-sm">
                     Nombre *
@@ -300,16 +262,57 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Cloudflare Turnstile */}
-                <div className="flex flex-col items-center gap-2">
-                  <div ref={turnstileRef} className="flex justify-center" />
-                  {error && (
-                    <p className="text-sm text-red-400 flex items-center gap-1">
-                      <AlertCircle className="w-4 h-4" />
-                      {error}
-                    </p>
-                  )}
+                {/* Honeypot - oculto para humanos, visible para bots */}
+                <div className="absolute opacity-0 top-0 left-0 h-0 w-0 -z-10 overflow-hidden" aria-hidden="true">
+                  <input
+                    type="text"
+                    name="_honey"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
                 </div>
+
+                {/* Checkbox de verificación - mismo patrón que Martin Pinto, adaptado al tema oscuro */}
+                <div
+                  className={`flex items-center gap-3 p-4 rounded-lg border cursor-pointer select-none transition-colors ${
+                    humanCheck
+                      ? 'bg-secondary/25 border-secondary'
+                      : humanCheckError
+                        ? 'bg-red-500/20 border-red-400'
+                        : 'bg-white/10 border-white/20 hover:border-secondary/60'
+                  }`}
+                  onClick={() => {
+                    setHumanCheck(!humanCheck);
+                    setHumanCheckError(null);
+                  }}
+                >
+                  <div
+                    className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
+                      humanCheck
+                        ? 'bg-secondary border-secondary'
+                        : 'border-white/40 bg-white/5'
+                    }`}
+                  >
+                    {humanCheck && <CheckCircle2 className="w-4 h-4 text-white" />}
+                  </div>
+                  <span className="text-sm text-white/90">
+                    Confirmo que no soy un robot
+                  </span>
+                </div>
+                {humanCheckError && (
+                  <div className="flex items-center gap-2 text-red-400">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <p className="text-sm">{humanCheckError}</p>
+                  </div>
+                )}
+                {submitError && (
+                  <div className="flex items-center gap-2 p-3 bg-red-500/15 border border-red-400/50 rounded-lg text-red-300">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <p className="text-sm">{submitError}</p>
+                  </div>
+                )}
 
                 <Button 
                   type="submit" 
@@ -319,10 +322,7 @@ export function ContactSection() {
                 >
                   {isSubmitting ? (
                     <>
-                      <svg className="animate-spin w-5 h-5 mr-2" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
+                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
                       Enviando...
                     </>
                   ) : (
