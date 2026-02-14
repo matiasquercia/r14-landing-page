@@ -4,8 +4,6 @@ import { Hero } from './components/Hero';
 import { ValueProposition } from './components/ValueProposition';
 import { ServicesSection } from './components/ServicesSection';
 import { AboutSection } from './components/AboutSection';
-import { QualitySection } from './components/QualitySection';
-import { ClientsSection } from './components/ClientsSection';
 import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -54,14 +52,6 @@ export default function App() {
         
         <div ref={setSectionRef('nosotros')}>
           <AboutSection />
-        </div>
-        
-        <div ref={setSectionRef('calidad')}>
-          <QualitySection />
-        </div>
-        
-        <div ref={setSectionRef('clientes')}>
-          <ClientsSection />
         </div>
         
         <div ref={setSectionRef('faq')}>

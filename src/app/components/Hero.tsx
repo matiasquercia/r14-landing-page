@@ -1,6 +1,7 @@
 import { Button } from './Button';
 import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_02_blanco.png";
 import { useRef, useEffect } from 'react';
+import { motion } from 'motion/react';
 
 interface HeroProps {
   onNavigate: (section: string) => void;
@@ -25,7 +26,7 @@ export function Hero({ onNavigate }: HeroProps) {
   }, []);
 
   return (
-    <section className="relative h-[700px] md:h-[800px] flex items-center justify-center overflow-hidden pt-24">
+    <section className="relative h-[650px] sm:h-[700px] md:h-[800px] flex items-center justify-center overflow-hidden pt-20 sm:pt-24">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         {/* Fallback image (se muestra mientras carga el video) */}
@@ -53,30 +54,58 @@ export function Hero({ onNavigate }: HeroProps) {
         {/* Overlay oscuro */}
         <div className="absolute inset-0 bg-primary/75"></div>
         
-        {/* Difuminado inferior para fusión con siguiente sección */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent"></div>
+        {/* Difuminado inferior para fusión suave con siguiente sección - MÁS LARGO */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center text-white">
-        <img 
-          src={logoImg} 
-          alt="Real de Catorce Logo" 
-          className="h-48 md:h-64 lg:h-72 mx-auto mb-10 drop-shadow-2xl" 
-        />
-        <h2 className="text-2xl md:text-3xl mb-8 text-secondary drop-shadow-md font-bold">
-          Logística y abastecimiento alimentario para organismos públicos y empresas.
-        </h2>
-        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto drop-shadow">
-          <span className="font-bold">Calidad, seguridad y eficiencia</span> en cada etapa del proceso
-        </p>
-        <Button 
-          variant="primary" 
-          size="lg"
-          onClick={() => onNavigate('servicios')}
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-6 sm:mb-8 md:mb-10"
         >
-          Conocé nuestros servicios
-        </Button>
+          <img 
+            src={logoImg} 
+            alt="Real de Catorce Logo" 
+            className="h-64 md:h-80 lg:h-96 mx-auto drop-shadow-2xl" 
+          />
+        </motion.div>
+        
+        <motion.h2
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8 text-white/95 drop-shadow-md font-bold px-2"
+        >
+          <span className="text-accent">Logística y abastecimiento alimentario</span> para organismos públicos y empresas.
+        </motion.h2>
+        
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow px-4"
+        >
+          <span className="font-bold">Calidad, seguridad y eficiencia</span> en cada etapa del proceso
+        </motion.p>
+        
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.7 }}
+          className="px-4"
+        >
+          <Button 
+            variant="primary" 
+            size="lg"
+            onClick={() => onNavigate('servicios')}
+            className="w-full sm:w-auto"
+          >
+            Conocé nuestros servicios
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

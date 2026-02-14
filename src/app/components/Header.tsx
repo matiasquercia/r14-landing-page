@@ -1,6 +1,6 @@
 import { Mail, MapPin, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01.png";
+import { motion, AnimatePresence } from 'motion/react';
 import logoImgWhite from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01_blanco.png";
 
 interface HeaderProps {
@@ -15,7 +15,6 @@ export function Header({ onNavigate }: HeaderProps) {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      // Mostrar logo del header cuando el logo del Hero ya no es visible
       setShowLogo(window.scrollY > 350);
     };
 
@@ -28,8 +27,6 @@ export function Header({ onNavigate }: HeaderProps) {
     { id: 'home', label: 'Inicio' },
     { id: 'servicios', label: 'Servicios' },
     { id: 'nosotros', label: 'Nosotros' },
-    { id: 'calidad', label: 'Calidad' },
-    { id: 'clientes', label: 'Clientes' },
     { id: 'faq', label: 'FAQ' },
     { id: 'contacto', label: 'Contacto' },
   ];
@@ -40,35 +37,52 @@ export function Header({ onNavigate }: HeaderProps) {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled ? 'shadow-[0_10px_40px_rgba(0,0,0,0.5)]' : ''
+    }`}>
       {/* Top bar */}
-      <div className="bg-primary text-primary-foreground py-2">
-        <div className="container mx-auto px-4">
+      <motion.div 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className={`transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-primary/95 backdrop-blur-xl border-b border-accent/20' 
+            : 'bg-primary/80 backdrop-blur-md'
+        }`}
+      >
+        <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center text-sm">
             {/* Emails - izquierda */}
             <div className="flex items-center gap-3 md:gap-4">
-              <a href="mailto:rrhh@realcatorce.com.ar" className="flex items-center gap-1 hover:text-secondary transition-colors">
-                <Mail className="w-4 h-4" />
-                <span className="hidden sm:inline">rrhh@realcatorce.com.ar</span>
-                <span className="sm:hidden">RRHH</span>
+              <a 
+                href="mailto:rrhh@realcatorce.com.ar" 
+                className="flex items-center gap-2 text-white/80 hover:text-accent transition-colors group"
+              >
+                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="hidden sm:inline font-medium">rrhh@realcatorce.com.ar</span>
+                <span className="sm:hidden font-medium">RRHH</span>
               </a>
-              <a href="mailto:proveedores@realcatorce.com.ar" className="flex items-center gap-1 hover:text-secondary transition-colors">
-                <Mail className="w-4 h-4" />
-                <span className="hidden sm:inline">proveedores@realcatorce.com.ar</span>
-                <span className="sm:hidden">Proveedores</span>
+              <a 
+                href="mailto:proveedores@realcatorce.com.ar" 
+                className="flex items-center gap-2 text-white/80 hover:text-accent transition-colors group"
+              >
+                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="hidden sm:inline font-medium">proveedores@realcatorce.com.ar</span>
+                <span className="sm:hidden font-medium">Proveedores</span>
               </a>
             </div>
             {/* Dirección + LinkedIn - derecha */}
             <div className="flex items-center gap-4">
-              <div className="hidden lg:flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>Ombú 1269, Burzaco | Lugano 73, Lomas de Zamora</span>
+              <div className="hidden lg:flex items-center gap-2 text-white/70">
+                <MapPin className="w-4 h-4 text-secondary" />
+                <span className="font-medium">Ombú 1269, Burzaco | Lugano 73, Lomas de Zamora</span>
               </div>
               <a 
                 href="https://www.linkedin.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-secondary transition-colors"
+                className="text-white/80 hover:text-accent transition-all hover:scale-110"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -78,79 +92,128 @@ export function Header({ onNavigate }: HeaderProps) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main navigation */}
-      <div className={`transition-all duration-300 ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
+      <div className={`transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-background/98 backdrop-blur-2xl border-b border-accent/10' 
+          : 'bg-transparent'
+      }`}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
-            {/* Logo - visible solo cuando el logo del Hero ya no se ve */}
-            <button 
-              onClick={() => handleNavClick('home')}
-              className={`flex items-center transition-all duration-300 ${showLogo ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-            >
-              <img 
-                src={isScrolled ? logoImg : logoImgWhite} 
-                alt="Real de Catorce" 
-                className="h-12" 
-              />
-            </button>
+          <div className="flex items-center py-4 gap-8">
+            {/* Logo - visible cuando se scrollea, usando el logo blanco del Hero */}
+            <AnimatePresence>
+              {showLogo && (
+                <motion.button
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => handleNavClick('home')}
+                  className="flex items-center hover:scale-105 transition-transform"
+                >
+                  <img 
+                    src={logoImgWhite} 
+                    alt="Real de Catorce" 
+                    className="h-12 drop-shadow-lg" 
+                  />
+                </motion.button>
+              )}
+            </AnimatePresence>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navItems.map((item) => (
-                <button
+            {/* Desktop Navigation - SIEMPRE A LA DERECHA */}
+            <nav className="hidden lg:flex items-center gap-2 ml-auto">
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.id}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => handleNavClick(item.id)}
-                  className={`transition-colors font-medium ${
+                  className={`px-4 py-2 rounded-lg transition-all duration-300 font-bold text-sm uppercase tracking-wider relative group ${
                     isScrolled 
                       ? 'text-foreground hover:text-accent' 
-                      : 'text-white hover:text-secondary'
+                      : 'text-white hover:text-accent'
                   }`}
                 >
                   {item.label}
-                </button>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+                </motion.button>
               ))}
             </nav>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button - A LA DERECHA */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`lg:hidden p-2 transition-colors ${
+              className={`lg:hidden p-3 rounded-xl transition-all duration-300 ml-auto ${
                 isScrolled 
-                  ? 'text-foreground hover:text-accent' 
-                  : 'text-white hover:text-secondary'
+                  ? 'text-foreground hover:bg-accent/10 hover:text-accent' 
+                  : 'text-white hover:bg-white/10 hover:text-accent'
               }`}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="w-6 h-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="w-6 h-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
 
           {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <nav className={`lg:hidden pb-4 border-t ${
-              isScrolled 
-                ? 'border-border bg-white' 
-                : 'border-white/20 bg-primary/90'
-            }`}>
-              <div className="flex flex-col gap-2 pt-4">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className={`text-left py-2 px-4 transition-colors rounded font-medium ${
-                      isScrolled 
-                        ? 'text-foreground hover:text-accent hover:bg-secondary/10' 
-                        : 'text-white hover:text-secondary hover:bg-white/10'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </nav>
-          )}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.nav
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className={`lg:hidden overflow-hidden border-t ${
+                  isScrolled 
+                    ? 'border-accent/10 bg-card/95 backdrop-blur-xl' 
+                    : 'border-white/10 bg-primary/90 backdrop-blur-md'
+                }`}
+              >
+                <div className="flex flex-col gap-1 py-4">
+                  {navItems.map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      onClick={() => handleNavClick(item.id)}
+                      className={`text-left py-3 px-4 transition-all duration-300 rounded-lg font-bold uppercase tracking-wider text-sm ${
+                        isScrolled 
+                          ? 'text-foreground hover:text-accent hover:bg-accent/10 hover:translate-x-2' 
+                          : 'text-white hover:text-accent hover:bg-white/10 hover:translate-x-2'
+                      }`}
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </header>

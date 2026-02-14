@@ -3,7 +3,8 @@
 
 @import 'tw-animate-css';
 
-/* Configuración de fuente Montserrat para Tailwind */
+/* Configuración de sistema tipográfico para Tailwind */
 @theme {
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Archivo Black', system-ui, sans-serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
