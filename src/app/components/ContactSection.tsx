@@ -6,7 +6,8 @@ import { SectionHeader } from './SectionHeader';
 // Imagen de fondo - oficina
 const BG_IMAGE = "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
 
-const FORMSUBMIT_EMAIL = 'admin@realdecatorce.com.ar';
+// Hash de FormSubmit para ocultar el email en el frontend
+const FORMSUBMIT_ACTION = '484f5cd12441930e7a6390dcd3a719e3';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ export function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_ACTION}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
