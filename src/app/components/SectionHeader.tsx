@@ -22,7 +22,7 @@ export function SectionHeader({
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="text-3xl md:text-4xl lg:text-5xl mb-6 text-foreground font-bold uppercase tracking-tight leading-tight"
+        className="text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground font-black uppercase tracking-tight leading-tight bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text"
       >
         {title}
       </motion.h2>
@@ -38,12 +38,13 @@ export function SectionHeader({
         </motion.p>
       ) : null}
       
+      {/* Decorative underline */}
       <motion.div
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className={`mt-6 h-0.5 w-16 bg-accent ${align === 'center' ? 'mx-auto' : ''}`}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className={`mt-6 h-1 w-24 bg-gradient-to-r from-accent to-secondary ${align === 'center' ? 'mx-auto' : ''}`}
       ></motion.div>
     </div>
   );
