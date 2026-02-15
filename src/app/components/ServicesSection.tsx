@@ -50,19 +50,16 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
       gradient: 'from-accent/20 to-accent/5',
       border: 'border-accent/20',
       text: 'text-accent',
-      glow: 'shadow-[0_10px_40px_rgba(0,212,230,0.15)]',
     },
     secondary: {
       gradient: 'from-secondary/20 to-secondary/5',
       border: 'border-secondary/20',
       text: 'text-secondary',
-      glow: 'shadow-[0_10px_40px_rgba(232,97,47,0.15)]',
     },
     tertiary: {
       gradient: 'from-tertiary/20 to-tertiary/5',
       border: 'border-tertiary/20',
       text: 'text-tertiary',
-      glow: 'shadow-[0_10px_40px_rgba(232,168,0,0.15)]',
     },
   };
 
@@ -97,8 +94,8 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
                   delay: index * 0.15,
                   ease: [0.16, 1, 0.3, 1] 
                 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className={`relative flex flex-col bg-card/80 backdrop-blur-sm border ${styles.border} rounded-3xl overflow-hidden transition-all duration-500 ${styles.glow} group`}
+                whileHover={{ y: -4 }}
+                className={`relative flex flex-col bg-card/80 backdrop-blur-sm border ${styles.border} rounded-3xl overflow-hidden transition-all duration-300`}
               >
                 {/* Service Image */}
                 <div className="relative h-56 overflow-hidden">
@@ -144,11 +141,6 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
                       </motion.li>
                     ))}
                   </ul>
-                </div>
-
-                {/* Animated glow on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div className={`absolute inset-0 border-2 ${styles.border} rounded-3xl animate-pulse`}></div>
                 </div>
               </motion.div>
             );

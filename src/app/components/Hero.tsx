@@ -79,7 +79,7 @@ export function Hero({ onNavigate }: HeroProps) {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8 text-white/95 drop-shadow-md font-bold px-2"
         >
-          <span className="text-accent">Logística y abastecimiento alimentario</span> para organismos públicos y empresas.
+          <span className="text-accent font-bold">Logística y abastecimiento alimentario</span> para organismos públicos y empresas.
         </motion.h2>
         
         <motion.p

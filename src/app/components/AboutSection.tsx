@@ -100,18 +100,11 @@ export function AboutSection() {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-accent/20 p-12 md:p-16 rounded-3xl text-center mb-20 overflow-hidden group hover:border-accent/40 transition-all duration-500"
+          className="relative bg-card/80 backdrop-blur-xl border border-accent/20 p-12 md:p-16 rounded-3xl text-center mb-20 overflow-hidden"
         >
-          {/* Background glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          
-          <p className="relative text-2xl md:text-3xl lg:text-4xl leading-relaxed text-foreground font-black uppercase tracking-tight">
+          <p className="relative text-2xl md:text-3xl lg:text-4xl leading-relaxed text-foreground font-semibold">
             Mantenemos vivo el espíritu que nos vio nacer, con una estructura moderna preparada para los desafíos actuales.
           </p>
-
-          {/* Decorative quotes */}
-          <div className="absolute top-6 left-6 text-6xl text-accent/20 font-black">"</div>
-          <div className="absolute bottom-6 right-6 text-6xl text-secondary/20 font-black rotate-180">"</div>
         </motion.div>
 
         {/* Values */}
@@ -121,7 +114,7 @@ export function AboutSection() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
+            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-bold uppercase tracking-tight"
           >
             Nuestras fortalezas
           </motion.h3>
@@ -142,17 +135,13 @@ export function AboutSection() {
                     delay: index * 0.08,
                     ease: [0.16, 1, 0.3, 1] 
                   }}
-                  whileHover={{ y: -8, scale: 1.05 }}
-                  className={`flex flex-col items-center text-center p-6 bg-card/60 backdrop-blur-sm border ${colors.border} rounded-2xl hover:bg-card/80 transition-all duration-300 group`}
+                  whileHover={{ y: -4 }}
+                  className={`flex flex-col items-center text-center p-6 bg-card/60 backdrop-blur-sm border ${colors.border} rounded-2xl hover:bg-card/80 transition-all duration-300`}
                 >
-                  <motion.div 
-                    whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                    transition={{ duration: 0.5 }}
-                    className={`${colors.bg} w-14 h-14 rounded-xl flex items-center justify-center mb-4 border ${colors.border}`}
-                  >
+                  <div className={`${colors.bg} w-14 h-14 rounded-xl flex items-center justify-center mb-4 border ${colors.border}`}>
                     <Icon className={`w-7 h-7 ${colors.icon}`} />
-                  </motion.div>
-                  <span className="text-sm font-bold text-foreground uppercase tracking-wide">
+                  </div>
+                  <span className="text-sm font-semibold text-foreground uppercase tracking-wide">
                     {value.label}
                   </span>
                 </motion.div>
@@ -168,9 +157,9 @@ export function AboutSection() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
+            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-bold uppercase tracking-tight"
           >
-            Trabajamos con distintos sectores
+            Nuestros principales clientes
           </motion.h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
@@ -189,17 +178,13 @@ export function AboutSection() {
                     delay: index * 0.15,
                     ease: [0.16, 1, 0.3, 1] 
                   }}
-                  whileHover={{ y: -8, scale: 1.03 }}
-                  className={`flex flex-col items-center text-center p-8 bg-card/70 backdrop-blur-sm border ${colors.border} rounded-3xl hover:bg-card/90 transition-all duration-300 group`}
+                  whileHover={{ y: -4 }}
+                  className={`flex flex-col items-center text-center p-8 bg-card/70 backdrop-blur-sm border ${colors.border} rounded-3xl hover:bg-card/90 transition-all duration-300`}
                 >
-                  <motion.div 
-                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                    className={`${colors.bg} w-20 h-20 rounded-2xl flex items-center justify-center mb-5 border-2 ${colors.border}`}
-                  >
+                  <div className={`${colors.bg} w-20 h-20 rounded-2xl flex items-center justify-center mb-5 border-2 ${colors.border}`}>
                     <Icon className={`w-10 h-10 ${colors.icon}`} />
-                  </motion.div>
-                  <span className="text-lg font-black text-foreground uppercase tracking-wide">
+                  </div>
+                  <span className="text-lg font-semibold text-foreground uppercase tracking-wide">
                     {client.label}
                   </span>
                 </motion.div>
