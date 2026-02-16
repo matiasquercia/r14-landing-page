@@ -37,6 +37,9 @@ export function AboutSection() {
     tertiary: { bg: 'bg-tertiary/20', icon: 'text-tertiary', border: 'border-tertiary/30' },
   };
 
+  const viewport = { once: true, amount: 0.15 } as const;
+  const noFlicker = { backfaceVisibility: 'hidden' as const };
+
   return (
     <section id="nosotros" className="relative py-32 scroll-mt-24 overflow-hidden">
       {/* Background decorative elements */}
@@ -55,8 +58,9 @@ export function AboutSection() {
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.8 }}
+            style={noFlicker}
             className="space-y-6"
           >
             <p className="text-lg md:text-xl leading-relaxed text-foreground/90 font-medium">
@@ -75,8 +79,9 @@ export function AboutSection() {
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.8 }}
+            style={noFlicker}
             className="relative"
           >
             {/* Decorative frame */}
@@ -98,8 +103,9 @@ export function AboutSection() {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 0.8 }}
+          style={noFlicker}
           className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-accent/20 p-12 md:p-16 rounded-3xl text-center mb-20 overflow-hidden group hover:border-accent/40 transition-all duration-500"
         >
           {/* Background glow effect */}
@@ -119,8 +125,9 @@ export function AboutSection() {
           <motion.h3
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.7 }}
+            style={noFlicker}
             className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
           >
             Nuestras fortalezas
@@ -136,12 +143,14 @@ export function AboutSection() {
                   key={index}
                   initial={{ y: 40, opacity: 0, scale: 0.9 }}
                   whileInView={{ y: 0, opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={viewport}
                   transition={{ 
+                    type: 'tween',
                     duration: 0.5, 
                     delay: index * 0.08,
                     ease: [0.16, 1, 0.3, 1] 
                   }}
+                  style={noFlicker}
                   whileHover={{ y: -8, scale: 1.05 }}
                   className={`flex flex-col items-center text-center p-6 bg-card/60 backdrop-blur-sm border ${colors.border} rounded-2xl hover:bg-card/80 transition-all duration-300 group`}
                 >
@@ -166,8 +175,9 @@ export function AboutSection() {
           <motion.h3
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.7 }}
+            style={noFlicker}
             className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
           >
             Trabajamos con distintos sectores
@@ -183,12 +193,14 @@ export function AboutSection() {
                   key={index}
                   initial={{ y: 50, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
+                  viewport={viewport}
                   transition={{ 
+                    type: 'tween',
                     duration: 0.6, 
                     delay: index * 0.15,
                     ease: [0.16, 1, 0.3, 1] 
                   }}
+                  style={noFlicker}
                   whileHover={{ y: -8, scale: 1.03 }}
                   className={`flex flex-col items-center text-center p-8 bg-card/70 backdrop-blur-sm border ${colors.border} rounded-3xl hover:bg-card/90 transition-all duration-300 group`}
                 >

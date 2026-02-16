@@ -36,6 +36,9 @@ export function FAQSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const viewport = { once: true, amount: 0.15 } as const;
+  const noFlicker = { backfaceVisibility: 'hidden' as const };
+
   return (
     <section id="faq" className="relative py-32 scroll-mt-24 overflow-hidden">
       {/* Background Image */}
@@ -67,8 +70,9 @@ export function FAQSection() {
                 key={index}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                viewport={viewport}
+                transition={{ type: 'tween', duration: 0.5, delay: index * 0.05 }}
+                style={noFlicker}
                 className={`border ${isOpen ? 'border-accent/40' : 'border-white/10'} rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-300 ${isOpen ? 'shadow-[0_0_30px_rgba(0,240,255,0.2)]' : ''}`}
               >
                 <motion.button

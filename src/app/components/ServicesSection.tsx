@@ -66,6 +66,9 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
     },
   };
 
+  const viewport = { once: true, amount: 0.15 } as const;
+  const noFlicker = { backfaceVisibility: 'hidden' as const };
+
   return (
     <section id="servicios" className="relative py-20 sm:py-24 md:py-32 scroll-mt-24 overflow-hidden">
       {/* Background decorative elements */}
@@ -91,12 +94,14 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
                 key={index}
                 initial={{ y: 60, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={viewport}
                 transition={{ 
+                  type: 'tween',
                   duration: 0.7, 
                   delay: index * 0.15,
                   ease: [0.16, 1, 0.3, 1] 
                 }}
+                style={noFlicker}
                 whileHover={{ y: -10, scale: 1.02 }}
                 className={`relative flex flex-col bg-card/80 backdrop-blur-sm border ${styles.border} rounded-3xl overflow-hidden transition-all duration-500 ${styles.glow} group`}
               >
@@ -133,8 +138,9 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
                         key={idx}
                         initial={{ x: -20, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.5 + (idx * 0.1) }}
+                        viewport={viewport}
+                        transition={{ type: 'tween', duration: 0.4, delay: 0.5 + (idx * 0.1) }}
+                        style={noFlicker}
                         className="flex items-center gap-3"
                       >
                         <span className={`bg-gradient-to-br ${styles.gradient} border ${styles.border} w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0`}>
@@ -159,8 +165,9 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         <motion.div
           initial={{ y: 40, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 0.7 }}
+          style={noFlicker}
           className="mb-16"
         >
           <div className="max-w-4xl mx-auto bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-accent/20 rounded-3xl p-8 md:p-10">
@@ -201,8 +208,9 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.5 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 0.7, delay: 0.5 }}
+          style={noFlicker}
           className="text-center"
         >
           <Button 

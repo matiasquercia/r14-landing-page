@@ -34,6 +34,9 @@ export function ClientsSection() {
     tertiary: { gradient: 'from-tertiary/30 to-tertiary/10', border: 'border-tertiary/30', text: 'text-tertiary' },
   };
 
+  const viewport = { once: true, amount: 0.15 } as const;
+  const noFlicker = { backfaceVisibility: 'hidden' as const };
+
   return (
     <section id="clientes" className="relative py-32 scroll-mt-24 overflow-hidden">
       {/* Background decorative elements */}
@@ -60,8 +63,9 @@ export function ClientsSection() {
                 key={index}
                 initial={{ y: 60, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
+                viewport={viewport}
+                transition={{ type: 'tween', duration: 0.7, delay: index * 0.15 }}
+                style={noFlicker}
                 whileHover={{ y: -10, scale: 1.02 }}
                 className={`relative bg-card/80 backdrop-blur-sm border ${colors.border} rounded-3xl overflow-hidden shadow-[0_10px_50px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_70px_rgba(0,0,0,0.3)] transition-all duration-500 group`}
               >
@@ -110,8 +114,9 @@ export function ClientsSection() {
         <motion.div
           initial={{ y: 40, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 0.8 }}
+          style={noFlicker}
           className="max-w-4xl mx-auto"
         >
           <div className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-accent/20 p-10 md:p-12 rounded-3xl overflow-hidden">

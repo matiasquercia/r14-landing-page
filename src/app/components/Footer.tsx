@@ -8,6 +8,8 @@ interface FooterProps {
 
 export function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const viewport = { once: true, amount: 0.15 } as const;
+  const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   const quickLinks = [
     { id: 'nosotros', label: 'Nosotros' },
@@ -30,8 +32,9 @@ export function Footer({ onNavigate }: FooterProps) {
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.7 }}
+            style={noFlicker}
           >
             <img src={logoImg} alt="Real de Catorce" className="h-14 mb-6 drop-shadow-[0_0_20px_rgba(0,240,255,0.3)]" />
             <p className="text-accent font-bold text-lg mb-4 uppercase tracking-wide">
@@ -46,8 +49,9 @@ export function Footer({ onNavigate }: FooterProps) {
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.7, delay: 0.1 }}
+            style={noFlicker}
           >
             <h4 className="mb-6 text-white font-black uppercase tracking-wider text-sm">Enlaces rápidos</h4>
             <nav className="space-y-3">
@@ -56,8 +60,9 @@ export function Footer({ onNavigate }: FooterProps) {
                   key={link.id}
                   initial={{ x: -20, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + (index * 0.05) }}
+                  viewport={viewport}
+                  transition={{ type: 'tween', duration: 0.5, delay: 0.2 + (index * 0.05) }}
+                  style={noFlicker}
                   whileHover={{ x: 5 }}
                   onClick={() => onNavigate(link.id)}
                   className="flex items-center gap-2 text-white/80 hover:text-accent transition-colors font-medium group"
@@ -73,8 +78,9 @@ export function Footer({ onNavigate }: FooterProps) {
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={viewport}
+            transition={{ type: 'tween', duration: 0.7, delay: 0.2 }}
+            style={noFlicker}
           >
             <h4 className="mb-6 text-white font-black uppercase tracking-wider text-sm">Contacto</h4>
             <div className="space-y-5">
@@ -132,8 +138,9 @@ export function Footer({ onNavigate }: FooterProps) {
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 0.7, delay: 0.3 }}
+          style={noFlicker}
           className="border-t border-white/10 pt-8 text-center"
         >
           <p className="text-sm text-white/60 font-medium">

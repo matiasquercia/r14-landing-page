@@ -57,6 +57,9 @@ export function ValueProposition() {
     },
   };
 
+  const viewport = { once: true, amount: 0.15 } as const;
+  const noFlicker = { backfaceVisibility: 'hidden' as const };
+
   return (
     <section className="relative py-20 sm:py-24 md:py-32 overflow-hidden -mt-24 pt-40 sm:pt-48 md:pt-56">
       {/* Background decorative elements */}
@@ -70,8 +73,9 @@ export function ValueProposition() {
         <motion.div 
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 0.7 }}
+          style={noFlicker}
           className="max-w-4xl mx-auto text-center mb-12 sm:mb-14 md:mb-16"
         >
           <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground/90 font-medium px-2">
@@ -91,12 +95,14 @@ export function ValueProposition() {
                 key={index}
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={viewport}
                 transition={{ 
+                  type: 'tween',
                   duration: 0.6, 
                   delay: item.delay,
                   ease: [0.16, 1, 0.3, 1] 
                 }}
+                style={noFlicker}
                 whileHover={{ y: -10, scale: 1.02 }}
                 className={`relative flex flex-col items-center text-center ${colors.bg} border ${colors.border} rounded-2xl p-6 sm:p-7 md:p-8 backdrop-blur-sm transition-all duration-500 ${colors.glow} ${colors.hoverGlow} group`}
               >
@@ -132,8 +138,9 @@ export function ValueProposition() {
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.6 }}
+          viewport={viewport}
+          transition={{ type: 'tween', duration: 1, delay: 0.6 }}
+          style={noFlicker}
           className="mt-16 h-1 bg-gradient-to-r from-transparent via-accent to-transparent"
         ></motion.div>
       </div>
