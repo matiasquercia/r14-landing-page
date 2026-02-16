@@ -12,7 +12,7 @@ export function Button({ children, variant = 'primary', size = 'md', className =
   
   const variantClasses = {
     primary: 'bg-accent text-accent-foreground hover:bg-accent/90 shadow-[0_0_25px_rgba(0,212,230,0.25)] hover:shadow-[0_0_40px_rgba(0,212,230,0.4)] hover:scale-105',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-[0_0_25px_rgba(232,97,47,0.25)] hover:shadow-[0_0_40px_rgba(232,97,47,0.4)] hover:scale-105',
+    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-[0_0_25px_rgba(8,145,178,0.25)] hover:shadow-[0_0_40px_rgba(8,145,178,0.4)] hover:scale-105',
     outline: 'border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground shadow-[0_0_15px_rgba(0,212,230,0.2)] hover:shadow-[0_0_30px_rgba(0,212,230,0.35)]',
     ghost: 'text-foreground hover:bg-white/10 hover:text-accent',
   };

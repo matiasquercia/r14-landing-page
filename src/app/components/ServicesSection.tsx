@@ -56,13 +56,13 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
       gradient: 'from-secondary/20 to-secondary/5',
       border: 'border-secondary/20',
       text: 'text-secondary',
-      glow: 'shadow-[0_10px_40px_rgba(232,97,47,0.15)]',
+      glow: 'shadow-[0_10px_40px_rgba(8,145,178,0.15)]',
     },
     tertiary: {
       gradient: 'from-tertiary/20 to-tertiary/5',
       border: 'border-tertiary/20',
       text: 'text-tertiary',
-      glow: 'shadow-[0_10px_40px_rgba(232,168,0,0.15)]',
+      glow: 'shadow-[0_10px_40px_rgba(14,165,233,0.15)]',
     },
   };
 

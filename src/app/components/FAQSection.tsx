@@ -78,8 +78,6 @@ export function FAQSection() {
                 <motion.button
                   onClick={() => toggleFAQ(index)}
                   className={`w-full flex justify-between items-center p-6 md:p-8 text-left transition-colors ${isOpen ? 'bg-white/10' : 'hover:bg-white/5'}`}
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
                 >
                   <h3 className="pr-6 text-base md:text-lg font-black uppercase tracking-wide text-white">
                     {faq.question}

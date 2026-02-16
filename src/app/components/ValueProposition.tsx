@@ -45,15 +45,15 @@ export function ValueProposition() {
       bg: 'bg-secondary/10',
       border: 'border-secondary/20',
       icon: 'text-secondary',
-      glow: 'shadow-[0_0_20px_rgba(232,97,47,0.15)]',
-      hoverGlow: 'hover:shadow-[0_0_35px_rgba(232,97,47,0.25)]',
+      glow: 'shadow-[0_0_20px_rgba(8,145,178,0.15)]',
+      hoverGlow: 'hover:shadow-[0_0_35px_rgba(8,145,178,0.25)]',
     },
     tertiary: {
       bg: 'bg-tertiary/10',
       border: 'border-tertiary/20',
       icon: 'text-tertiary',
-      glow: 'shadow-[0_0_20px_rgba(232,168,0,0.15)]',
-      hoverGlow: 'hover:shadow-[0_0_35px_rgba(232,168,0,0.25)]',
+      glow: 'shadow-[0_0_20px_rgba(14,165,233,0.15)]',
+      hoverGlow: 'hover:shadow-[0_0_35px_rgba(14,165,233,0.25)]',
     },
   };
 

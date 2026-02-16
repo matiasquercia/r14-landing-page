@@ -13,20 +13,20 @@
   --popover: #1A2135;
   --popover-foreground: #F8F9FA;
   
-  /* Primary: Azul profundo industrial con presencia */
+  /* Primary: Azul profundo (paleta original) */
   --primary: #0D1B4D;
   --primary-foreground: #FFFFFF;
   
-  /* Secondary: Naranja energético para contraste y dinamismo - REDUCIDO */
-  --secondary: #E8612F;
-  --secondary-foreground: #0A0E1A;
+  /* Secondary: Cyan/azul en la misma gama que el celeste */
+  --secondary: #0891B2;
+  --secondary-foreground: #FFFFFF;
   
-  /* Accent: Cyan brillante para highlights y CTAs - REDUCIDO */
+  /* Accent: Celeste principal de la página */
   --accent: #00D4E6;
   --accent-foreground: #0A0E1A;
   
-  /* Tertiary: Amarillo cálido para enfatizar confianza - REDUCIDO */
-  --tertiary: #E8A800;
+  /* Tertiary: Azul cielo, misma gama azules/celestes */
+  --tertiary: #0EA5E9;
   --tertiary-foreground: #0A0E1A;
   
   --muted: #1E2538;
@@ -41,10 +41,10 @@
   --font-weight-normal: 400;
   --ring: #00D4E6;
   --chart-1: #00D4E6;
-  --chart-2: #E8612F;
-  --chart-3: #E8A800;
-  --chart-4: #7B61FF;
-  --chart-5: #00D4AA;
+  --chart-2: #0891B2;
+  --chart-3: #0EA5E9;
+  --chart-4: #38BDF8;
+  --chart-5: #22D3EE;
   --radius: 1rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -152,9 +152,9 @@
       linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px),
       linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
       /* Gradientes radiales para profundidad atmosférica */
-      radial-gradient(ellipse at 10% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(255, 184, 0, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at 10% 20%, rgba(8, 145, 178, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(0, 212, 230, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 60%),
       /* Base gradient oscuro */
       linear-gradient(180deg, #0A0E1A 0%, #0D1B4D 50%, #0A0E1A 100%);
     background-size: 
