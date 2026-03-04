@@ -1,26 +1,27 @@
 import { SectionHeader } from './SectionHeader';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { imgPersona1, imgPersona2, imgOficina } from '@/assets/img';
 import { motion } from 'motion/react';
 import { Building2, GraduationCap, Briefcase } from 'lucide-react';
 
 export function ClientsSection() {
   const sectors = [
     {
-      image: 'https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&w=800&q=80',
+      image: imgOficina,
       title: 'Organismos públicos',
       description: 'Soluciones adaptadas a las necesidades del sector público',
       icon: Building2,
       color: 'accent',
     },
     {
-      image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=800&q=80',
+      image: imgPersona1,
       title: 'Instituciones',
       description: 'Abastecimiento para instituciones educativas y sociales',
       icon: GraduationCap,
       color: 'secondary',
     },
     {
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+      image: imgPersona2,
       title: 'Empresas privadas',
       description: 'Servicios personalizados para el sector empresarial',
       icon: Briefcase,
@@ -29,7 +30,7 @@ export function ClientsSection() {
   ];
 
   const colorMap = {
-    accent: { gradient: 'from-accent/30 to-accent/10', border: 'border-accent/30', text: 'text-accent' },
+    accent: { gradient: 'from-secondary/30 to-secondary/10', border: 'border-secondary/30', text: 'text-secondary' },
     secondary: { gradient: 'from-secondary/30 to-secondary/10', border: 'border-secondary/30', text: 'text-secondary' },
     tertiary: { gradient: 'from-tertiary/30 to-tertiary/10', border: 'border-tertiary/30', text: 'text-tertiary' },
   };
@@ -41,7 +42,7 @@ export function ClientsSection() {
     <section id="clientes" className="relative py-32 scroll-mt-24 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 right-0 w-[600px] h-[600px] bg-tertiary/5 rounded-full blur-3xl"></div>
       </div>
 
@@ -93,7 +94,7 @@ export function ClientsSection() {
                 
                 {/* Content */}
                 <div className="p-8 text-center">
-                  <h3 className={`mb-3 text-2xl font-black uppercase tracking-tight ${colors.text}`}>
+                  <h3 className={`mb-3 text-base font-black uppercase tracking-tight ${colors.text}`}>
                     {sector.title}
                   </h3>
                   <p className="text-foreground/70 text-sm font-medium leading-relaxed">
@@ -119,9 +120,9 @@ export function ClientsSection() {
           style={noFlicker}
           className="max-w-4xl mx-auto"
         >
-          <div className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-accent/20 p-10 md:p-12 rounded-3xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-secondary/25 p-10 md:p-12 rounded-3xl overflow-hidden">
             {/* Decorative accent */}
-            <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-accent via-secondary to-tertiary"></div>
+            <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-secondary via-tertiary to-secondary"></div>
             
             <p className="text-lg leading-relaxed text-foreground/90 font-medium mb-4">
               Trabajamos principalmente con el sector público, y contamos con la capacidad operativa 

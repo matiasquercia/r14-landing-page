@@ -47,7 +47,7 @@ export function Header({ onNavigate }: HeaderProps) {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`transition-all duration-300 ${
           isScrolled 
-            ? 'bg-primary/95 backdrop-blur-xl border-b border-accent/20' 
+            ? 'bg-primary/95 backdrop-blur-xl border-b border-secondary/25' 
             : 'bg-primary/80 backdrop-blur-md'
         }`}
       >
@@ -57,7 +57,7 @@ export function Header({ onNavigate }: HeaderProps) {
             <div className="flex items-center gap-3 md:gap-4">
               <a 
                 href="mailto:rrhh@realcatorce.com.ar" 
-                className="flex items-center gap-2 text-white/80 hover:text-accent transition-colors group"
+                className="flex items-center gap-2 text-white/80 hover:text-secondary transition-colors group"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="hidden sm:inline font-medium">rrhh@realcatorce.com.ar</span>
@@ -65,7 +65,7 @@ export function Header({ onNavigate }: HeaderProps) {
               </a>
               <a 
                 href="mailto:proveedores@realcatorce.com.ar" 
-                className="flex items-center gap-2 text-white/80 hover:text-accent transition-colors group"
+                className="flex items-center gap-2 text-white/80 hover:text-secondary transition-colors group"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="hidden sm:inline font-medium">proveedores@realcatorce.com.ar</span>
@@ -76,13 +76,13 @@ export function Header({ onNavigate }: HeaderProps) {
             <div className="flex items-center gap-4">
               <div className="hidden lg:flex items-center gap-2 text-white/70">
                 <MapPin className="w-4 h-4 text-secondary" />
-                <span className="font-medium">Ombú 1269, Burzaco | Lugano 73, Lomas de Zamora</span>
+                <span className="font-medium">Burzaco | Lomas de Zamora</span>
               </div>
               <a 
                 href="https://www.linkedin.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/80 hover:text-accent transition-all hover:scale-110"
+                className="text-white/80 hover:text-secondary transition-all hover:scale-110"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@ export function Header({ onNavigate }: HeaderProps) {
       {/* Main navigation */}
       <div className={`transition-all duration-500 ${
         isScrolled 
-          ? 'bg-background/98 backdrop-blur-2xl border-b border-accent/10' 
+          ? 'bg-background/98 backdrop-blur-2xl border-b border-secondary/15' 
           : 'bg-transparent'
       }`}>
         <div className="container mx-auto px-4">
@@ -133,12 +133,12 @@ export function Header({ onNavigate }: HeaderProps) {
                   onClick={() => handleNavClick(item.id)}
                   className={`px-4 py-2 rounded-lg transition-all duration-300 font-bold text-sm uppercase tracking-wider relative group ${
                     isScrolled 
-                      ? 'text-foreground hover:text-accent' 
-                      : 'text-white hover:text-accent'
+                      ? 'text-foreground hover:text-secondary' 
+                      : 'text-white hover:text-secondary'
                   }`}
                 >
                   {item.label}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
                 </motion.button>
               ))}
             </nav>
@@ -148,8 +148,8 @@ export function Header({ onNavigate }: HeaderProps) {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`lg:hidden p-3 rounded-xl transition-all duration-300 ml-auto ${
                 isScrolled 
-                  ? 'text-foreground hover:bg-accent/10 hover:text-accent' 
-                  : 'text-white hover:bg-white/10 hover:text-accent'
+                  ? 'text-foreground hover:bg-secondary/15 hover:text-secondary' 
+                  : 'text-white hover:bg-white/10 hover:text-secondary'
               }`}
               aria-label="Toggle menu"
             >
@@ -189,7 +189,7 @@ export function Header({ onNavigate }: HeaderProps) {
                 transition={{ duration: 0.3 }}
                 className={`lg:hidden overflow-hidden border-t ${
                   isScrolled 
-                    ? 'border-accent/10 bg-card/95 backdrop-blur-xl' 
+                    ? 'border-secondary/15 bg-card/95 backdrop-blur-xl' 
                     : 'border-white/10 bg-primary/90 backdrop-blur-md'
                 }`}
               >
@@ -203,8 +203,8 @@ export function Header({ onNavigate }: HeaderProps) {
                       onClick={() => handleNavClick(item.id)}
                       className={`text-left py-3 px-4 transition-all duration-300 rounded-lg font-bold uppercase tracking-wider text-sm ${
                         isScrolled 
-                          ? 'text-foreground hover:text-accent hover:bg-accent/10 hover:translate-x-2' 
-                          : 'text-white hover:text-accent hover:bg-white/10 hover:translate-x-2'
+                          ? 'text-foreground hover:text-secondary hover:bg-secondary/15 hover:translate-x-2' 
+                          : 'text-white hover:text-secondary hover:bg-white/10 hover:translate-x-2'
                       }`}
                     >
                       {item.label}

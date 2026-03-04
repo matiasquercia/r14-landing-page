@@ -26,7 +26,7 @@ export function Hero({ onNavigate }: HeroProps) {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 pb-20 md:pb-32">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-28 pb-24 md:pb-28">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         {/* Fallback image (se muestra mientras carga el video) */}
@@ -54,22 +54,22 @@ export function Hero({ onNavigate }: HeroProps) {
         {/* Overlay oscuro */}
         <div className="absolute inset-0 bg-primary/75"></div>
         
-        {/* Difuminado inferior para fusión suave con siguiente sección - MÁS LARGO */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+        {/* Difuminado inferior para fusión suave con siguiente sección */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 md:h-56 bg-gradient-to-t from-background via-background/90 to-transparent"></div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 z-10 text-center text-white">
+      <div className="container mx-auto px-4 sm:px-6 z-10 text-center text-white">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="mb-6 sm:mb-8 md:mb-10"
+          className="mb-8 sm:mb-10"
         >
           <img 
             src={logoImg} 
             alt="Real de Catorce Logo" 
-            className="h-64 md:h-80 lg:h-96 mx-auto drop-shadow-2xl" 
+            className="h-36 sm:h-40 md:h-44 lg:h-52 mx-auto drop-shadow-2xl w-auto max-w-[90vw] object-contain" 
           />
         </motion.div>
         
@@ -77,9 +77,9 @@ export function Hero({ onNavigate }: HeroProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8 text-white/95 drop-shadow-md px-2"
+          className="text-base sm:text-lg md:text-xl mb-5 sm:mb-6 text-white/95 drop-shadow-md max-w-2xl mx-auto leading-snug"
         >
-          <span className="text-accent font-bold">Logística y abastecimiento alimentario</span>{' '}
+          <span className="text-secondary font-bold">Logística y abastecimiento alimentario</span>{' '}
           <span className="font-normal">para organismos públicos y empresas.</span>
         </motion.h2>
         
@@ -87,7 +87,7 @@ export function Hero({ onNavigate }: HeroProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow px-4"
+          className="text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-xl mx-auto drop-shadow leading-relaxed"
         >
           <span className="font-bold">Calidad, seguridad y eficiencia</span> en cada etapa del proceso
         </motion.p>
@@ -96,13 +96,12 @@ export function Hero({ onNavigate }: HeroProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="px-4"
         >
           <Button 
             variant="primary" 
             size="lg"
             onClick={() => onNavigate('servicios')}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto min-w-[240px]"
           >
             Conocé nuestros servicios
           </Button>

@@ -3,8 +3,7 @@ import { Mail, MapPin, Send, CheckCircle, AlertCircle, CheckCircle2, Loader2 } f
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
 
-// Imagen de fondo - oficina
-const BG_IMAGE = "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
+import { imgOficina } from '@/assets/img';
 
 // Hash de FormSubmit para ocultar el email en el frontend
 const FORMSUBMIT_ACTION = '484f5cd12441930e7a6390dcd3a719e3';
@@ -26,11 +25,11 @@ export function ContactSection() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Honeypot: si se llenó, es un bot
+    // Honeypot: si se llen??, es un bot
     if (honeypot) return;
 
     if (!humanCheck) {
-      setHumanCheckError('Por favor confirmá que no sos un robot.');
+      setHumanCheckError('Por favor confirm?? que no sos un robot.');
       return;
     }
 
@@ -60,7 +59,7 @@ export function ContactSection() {
       setSubmitted(true);
     } catch (err) {
       console.error('Error al enviar el formulario:', err);
-      setSubmitError('No se pudo enviar el mensaje. Intentá de nuevo en unos minutos.');
+      setSubmitError('No se pudo enviar el mensaje. Intent?? de nuevo en unos minutos.');
     } finally {
       setIsSubmitting(false);
     }
@@ -84,7 +83,7 @@ export function ContactSection() {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: `url(${BG_IMAGE})` }}
+        style={{ backgroundImage: `url(${imgOficina})` }}
       />
       {/* Overlay oscuro */}
       <div className="absolute inset-0 bg-primary/85" />
@@ -92,7 +91,7 @@ export function ContactSection() {
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title="Contacto institucional"
-          subtitle="Nuestro equipo está disponible para responder consultas y brindar información sobre nuestros servicios."
+          subtitle="Nuestro equipo est?? disponible para responder consultas y brindar informaci??n sobre nuestros servicios."
           className="mb-12 [&_h2]:text-white [&_p]:text-white/80"
         />
 
@@ -101,14 +100,14 @@ export function ContactSection() {
           <div className="flex flex-col gap-6">
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
               <h3 className="mb-4 flex items-center gap-2 text-white">
-                <Mail className="w-5 h-5 text-accent" />
+                <Mail className="w-5 h-5 text-secondary" />
                 Contactanos
               </h3>
               <div className="space-y-2 pl-8">
                 <p>
                   <a 
                     href="mailto:rrhh@realcatorce.com.ar" 
-                    className="text-accent hover:text-accent/80 hover:underline"
+                    className="text-secondary hover:text-secondary/90 hover:underline"
                   >
                     rrhh@realcatorce.com.ar
                   </a>
@@ -116,7 +115,7 @@ export function ContactSection() {
                 <p>
                   <a 
                     href="mailto:proveedores@realcatorce.com.ar" 
-                    className="text-accent hover:text-accent/80 hover:underline"
+                    className="text-secondary hover:text-secondary/90 hover:underline"
                   >
                     proveedores@realcatorce.com.ar
                   </a>
@@ -126,7 +125,7 @@ export function ContactSection() {
                     href="https://www.linkedin.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-accent hover:text-accent/80 hover:underline inline-flex items-center gap-2"
+                    className="text-secondary hover:text-secondary/90 hover:underline inline-flex items-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -140,18 +139,18 @@ export function ContactSection() {
             {/* Maps */}
             <div className="flex flex-col flex-grow bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
               <h3 className="mb-4 flex items-center gap-2 text-white">
-                <MapPin className="w-5 h-5 text-accent" />
+                <MapPin className="w-5 h-5 text-secondary" />
                 Nuestras ubicaciones
               </h3>
               <div className="flex flex-col gap-4 flex-grow">
                 {/* Mapa Burzaco */}
                 <div className="overflow-hidden rounded-lg border border-white/20 flex-grow flex flex-col">
-                  <div className="bg-accent/30 text-white px-4 py-2">
-                    <p className="font-medium text-sm">Ombú 1269, Burzaco</p>
+                  <div className="bg-secondary/40 text-white px-4 py-2">
+                    <p className="font-medium text-sm">Burzaco</p>
                     <p className="text-xs text-white/70">Buenos Aires, Argentina</p>
                   </div>
                   <iframe
-                    title="Ubicación Burzaco"
+                    title="Ubicaci??n Burzaco"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.8888888888!2d-58.3917!3d-34.8278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2d6a7c000001%3A0x1!2sOmb%C3%BA%201269%2C%20Burzaco%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1"
                     className="w-full flex-grow min-h-[100px]"
                     loading="lazy"
@@ -160,12 +159,12 @@ export function ContactSection() {
                 </div>
                 {/* Mapa Lomas de Zamora */}
                 <div className="overflow-hidden rounded-lg border border-white/20 flex-grow flex flex-col">
-                  <div className="bg-accent/30 text-white px-4 py-2">
-                    <p className="font-medium text-sm">Lugano 73, Lomas de Zamora</p>
+                  <div className="bg-secondary/40 text-white px-4 py-2">
+                    <p className="font-medium text-sm">Lomas de Zamora</p>
                     <p className="text-xs text-white/70">Buenos Aires, Argentina</p>
                   </div>
                   <iframe
-                    title="Ubicación Lomas de Zamora"
+                    title="Ubicaci?n Lomas de Zamora"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.8888888888!2d-58.4069!3d-34.7617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2d7b9c000001%3A0x1!2sLugano%2073%2C%20Lomas%20de%20Zamora%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1"
                     className="w-full flex-grow min-h-[100px]"
                     loading="lazy"
@@ -178,18 +177,18 @@ export function ContactSection() {
 
           {/* Right Column: Contact Form */}
           <div className="flex flex-col bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 md:p-8">
-            <h3 className="mb-6 text-white">Enviar consulta</h3>
+            <h3 className="mb-4 text-base font-bold text-white">Enviar consulta</h3>
             
             {submitted ? (
               <div className="flex-grow flex flex-col items-center justify-center text-center p-6">
-                <div className="w-20 h-20 bg-accent/30 rounded-full flex items-center justify-center mb-6 animate-[bounce_0.5s_ease-in-out]">
-                  <CheckCircle className="w-12 h-12 text-accent" />
+                <div className="w-20 h-20 bg-secondary/40 rounded-full flex items-center justify-center mb-6 animate-[bounce_0.5s_ease-in-out]">
+                  <CheckCircle className="w-12 h-12 text-secondary" />
                 </div>
-                <h4 className="text-2xl font-semibold text-white mb-3">
-                  ¡Consulta enviada!
+                <h4 className="text-lg font-semibold text-white mb-3">
+                  ?Consulta enviada!
                 </h4>
                 <p className="text-white/70 mb-6 max-w-sm">
-                  Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá a la brevedad.
+                  Gracias por contactarnos. Nuestro equipo revisar? tu mensaje y te responder? a la brevedad.
                 </p>
                 <Button 
                   variant="primary" 
@@ -213,7 +212,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent disabled:opacity-50"
                   />
                 </div>
 
@@ -228,7 +227,7 @@ export function ContactSection() {
                     value={formData.empresa}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent disabled:opacity-50"
                   />
                 </div>
 
@@ -244,7 +243,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent disabled:opacity-50"
                   />
                 </div>
 
@@ -275,14 +274,14 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Checkbox de verificación - mismo patrón que Martin Pinto, adaptado al tema oscuro */}
+                {/* Checkbox de verificaci?n - mismo patr?n que Martin Pinto, adaptado al tema oscuro */}
                 <div
                   className={`flex items-center gap-3 p-4 rounded-lg border cursor-pointer select-none transition-colors ${
                     humanCheck
-                      ? 'bg-accent/25 border-accent'
+                      ? 'bg-secondary/30 border-secondary'
                       : humanCheckError
                         ? 'bg-red-500/20 border-red-400'
-                        : 'bg-white/10 border-white/20 hover:border-accent/60'
+                        : 'bg-white/10 border-white/20 hover:border-secondary/60'
                   }`}
                   onClick={() => {
                     setHumanCheck(!humanCheck);
@@ -292,7 +291,7 @@ export function ContactSection() {
                   <div
                     className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
                       humanCheck
-                        ? 'bg-accent border-accent'
+                        ? 'bg-secondary border-secondary'
                         : 'border-white/40 bg-white/5'
                     }`}
                   >

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, Plus, Minus } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
+import { SectionDivider } from './SectionDivider';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Imagen de fondo - patrón abstracto
@@ -41,23 +42,26 @@ export function FAQSection() {
 
   return (
     <section id="faq" className="relative py-32 scroll-mt-24 overflow-hidden">
+      <SectionDivider position="top" />
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${BG_IMAGE})` }}
       />
-      {/* Overlay with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-background/95 to-primary/95" />
+      {/* Overlay claro - mantiene la imagen visible con tinte suave */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-[#F6F8FA]/95 to-white/90" />
       
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+      {/* Efectos decorativos de color - se mantienen */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-tertiary/10 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title="Preguntas frecuentes"
           subtitle="Respondemos las consultas más comunes sobre nuestros servicios."
-          className="mb-16 md:mb-20 [&_h2]:text-white [&_p]:text-white/90 [&_div]:bg-secondary"
+          variant="light"
+          className="mb-16 md:mb-20"
         />
 
         {/* FAQ Accordion */}
@@ -73,22 +77,22 @@ export function FAQSection() {
                 viewport={viewport}
                 transition={{ type: 'tween', duration: 0.5, delay: index * 0.05 }}
                 style={noFlicker}
-                className={`border ${isOpen ? 'border-accent/40' : 'border-white/10'} rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-300 ${isOpen ? 'shadow-[0_0_30px_rgba(0,240,255,0.2)]' : ''}`}
+                className={`border ${isOpen ? 'border-secondary/40' : 'border-white/10'} rounded-2xl overflow-hidden bg-primary/90 backdrop-blur-md transition-all duration-300 ${isOpen ? 'shadow-[0_0_30px_rgba(161,197,255,0.2)]' : ''}`}
               >
                 <motion.button
                   onClick={() => toggleFAQ(index)}
                   className={`w-full flex justify-between items-center p-6 md:p-8 text-left transition-colors ${isOpen ? 'bg-white/10' : 'hover:bg-white/5'}`}
                 >
-                  <h3 className="pr-6 text-base md:text-lg font-black uppercase tracking-wide text-white">
+                  <h3 className="pr-6 text-sm md:text-base font-black uppercase tracking-wide text-white">
                     {faq.question}
                   </h3>
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${isOpen ? 'bg-accent' : 'bg-white/10'}`}
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${isOpen ? 'bg-secondary' : 'bg-white/10'}`}
                   >
                     {isOpen ? (
-                      <Minus className="w-5 h-5 text-background font-bold" />
+                      <Minus className="w-5 h-5 text-secondary-foreground font-bold" />
                     ) : (
                       <Plus className="w-5 h-5 text-white" />
                     )}
@@ -117,6 +121,7 @@ export function FAQSection() {
           })}
         </div>
       </div>
+      <SectionDivider position="bottom" />
     </section>
   );
 }

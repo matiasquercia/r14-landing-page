@@ -1,5 +1,6 @@
 import { Clock, Shield, Truck, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
+import { StatsCounter } from './StatsCounter';
 
 export function ValueProposition() {
   const benefits = [
@@ -35,25 +36,25 @@ export function ValueProposition() {
 
   const colorMap = {
     accent: {
-      bg: 'bg-accent/10',
-      border: 'border-accent/20',
-      icon: 'text-accent',
-      glow: 'shadow-[0_0_20px_rgba(0,212,230,0.15)]',
-      hoverGlow: 'hover:shadow-[0_0_35px_rgba(0,212,230,0.25)]',
+      bg: 'bg-secondary/15',
+      border: 'border-secondary/25',
+      icon: 'text-secondary',
+      glow: 'shadow-[0_0_20px_rgba(161,197,255,0.12)]',
+      hoverGlow: 'hover:shadow-[0_0_35px_rgba(161,197,255,0.2)]',
     },
     secondary: {
       bg: 'bg-secondary/10',
       border: 'border-secondary/20',
       icon: 'text-secondary',
-      glow: 'shadow-[0_0_20px_rgba(8,145,178,0.15)]',
-      hoverGlow: 'hover:shadow-[0_0_35px_rgba(8,145,178,0.25)]',
+      glow: 'shadow-[0_0_20px_rgba(161,197,255,0.15)]',
+      hoverGlow: 'hover:shadow-[0_0_35px_rgba(161,197,255,0.25)]',
     },
     tertiary: {
       bg: 'bg-tertiary/10',
       border: 'border-tertiary/20',
       icon: 'text-tertiary',
-      glow: 'shadow-[0_0_20px_rgba(14,165,233,0.15)]',
-      hoverGlow: 'hover:shadow-[0_0_35px_rgba(14,165,233,0.25)]',
+      glow: 'shadow-[0_0_20px_rgba(91,138,255,0.15)]',
+      hoverGlow: 'hover:shadow-[0_0_35px_rgba(91,138,255,0.25)]',
     },
   };
 
@@ -64,7 +65,7 @@ export function ValueProposition() {
     <section className="relative py-20 sm:py-24 md:py-32 overflow-hidden -mt-24 pt-40 sm:pt-48 md:pt-56">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
       </div>
       
@@ -78,11 +79,14 @@ export function ValueProposition() {
           style={noFlicker}
           className="max-w-4xl mx-auto text-center mb-12 sm:mb-14 md:mb-16"
         >
-          <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground/90 font-medium px-2">
-            En <span className="font-black text-accent">Real de Catorce</span> somos una empresa especializada en logística alimentaria, 
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-foreground/90 font-medium px-2">
+            En <span className="font-black text-secondary">Real de Catorce</span> somos una empresa especializada en logística alimentaria, 
             dedicada al abastecimiento y reparto diario de alimentos frescos, congelados y envasados.
           </p>
         </motion.div>
+
+        {/* Stats Counters */}
+        <StatsCounter />
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
@@ -117,7 +121,7 @@ export function ValueProposition() {
                   <Icon className={`w-8 h-8 ${colors.icon}`} />
                 </motion.div>
                 
-                <h3 className="mb-3 text-foreground font-black text-lg uppercase tracking-wide">
+                <h3 className="mb-3 text-foreground font-black text-base uppercase tracking-wide">
                   {item.title}
                 </h3>
                 
@@ -133,16 +137,6 @@ export function ValueProposition() {
             );
           })}
         </div>
-
-        {/* Bottom accent line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={viewport}
-          transition={{ type: 'tween', duration: 1, delay: 0.6 }}
-          style={noFlicker}
-          className="mt-16 h-1 bg-gradient-to-r from-transparent via-accent to-transparent"
-        ></motion.div>
       </div>
     </section>
   );

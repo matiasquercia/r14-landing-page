@@ -4,6 +4,7 @@ interface SectionHeaderProps {
   title: string;
   subtitle?: string;
   align?: 'left' | 'center';
+  variant?: 'dark' | 'light';
   className?: string;
 }
 
@@ -11,9 +12,18 @@ export function SectionHeader({
   title,
   subtitle,
   align = 'center',
+  variant = 'dark',
   className = '',
 }: SectionHeaderProps) {
   const alignmentClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+  const isLight = variant === 'light';
+
+  const titleClass = isLight
+    ? 'text-2xl md:text-3xl lg:text-4xl mb-4 text-section-light-foreground font-black uppercase tracking-tight leading-tight'
+    : 'text-2xl md:text-3xl lg:text-4xl mb-4 text-foreground font-black uppercase tracking-tight leading-tight bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text';
+  const subtitleClass = isLight
+    ? 'text-sm md:text-base leading-relaxed text-section-light-muted font-medium'
+    : 'text-sm md:text-base leading-relaxed text-muted-foreground font-medium';
 
   const viewport = { once: true, amount: 0.15 } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
@@ -26,7 +36,7 @@ export function SectionHeader({
         viewport={viewport}
         transition={{ type: 'tween', duration: 0.7 }}
         style={noFlicker}
-        className="text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground font-black uppercase tracking-tight leading-tight bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text"
+        className={titleClass}
       >
         {title}
       </motion.h2>
@@ -37,7 +47,7 @@ export function SectionHeader({
           viewport={viewport}
           transition={{ type: 'tween', duration: 0.7, delay: 0.2 }}
           style={noFlicker}
-          className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium"
+          className={subtitleClass}
         >
           {subtitle}
         </motion.p>
@@ -50,7 +60,7 @@ export function SectionHeader({
         viewport={viewport}
         transition={{ type: 'tween', duration: 0.8, delay: 0.4 }}
         style={noFlicker}
-        className={`mt-6 h-1 w-24 bg-gradient-to-r from-accent to-secondary ${align === 'center' ? 'mx-auto' : ''}`}
+        className={`mt-4 h-0.5 w-16 bg-gradient-to-r from-primary to-tertiary ${align === 'center' ? 'mx-auto' : ''}`}
       ></motion.div>
     </div>
   );

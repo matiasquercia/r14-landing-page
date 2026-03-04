@@ -5,32 +5,32 @@
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size: 16px;
   
-  /* Paleta Bold & Memorable - Inspirada en logística moderna con toques industriales */
-  --background: #0A0E1A;
-  --foreground: #F8F9FA;
-  --card: #12172B;
-  --card-foreground: #F8F9FA;
-  --popover: #1A2135;
-  --popover-foreground: #F8F9FA;
+  /* Paleta R14 / Real de Catorce - Branding oficial */
+  --background: #000D2E;
+  --foreground: #F6F6F6;
+  --card: #001358;
+  --card-foreground: #F6F6F6;
+  --popover: #001358;
+  --popover-foreground: #F6F6F6;
   
-  /* Primary: Azul profundo (paleta original) */
-  --primary: #0D1B4D;
-  --primary-foreground: #FFFFFF;
+  /* Primary: Azul oscuro (#001358) */
+  --primary: #001358;
+  --primary-foreground: #F6F6F6;
   
-  /* Secondary: Cyan/azul en la misma gama que el celeste */
-  --secondary: #0891B2;
-  --secondary-foreground: #FFFFFF;
+  /* Secondary: Azul claro (#A1C5FF) */
+  --secondary: #A1C5FF;
+  --secondary-foreground: #161616;
   
-  /* Accent: Celeste principal de la página */
-  --accent: #00D4E6;
-  --accent-foreground: #0A0E1A;
+  /* Accent: Azul vibrante (#1C26E9) */
+  --accent: #1C26E9;
+  --accent-foreground: #F6F6F6;
   
-  /* Tertiary: Azul cielo, misma gama azules/celestes */
-  --tertiary: #0EA5E9;
-  --tertiary-foreground: #0A0E1A;
+  /* Tertiary: variante entre secondary y accent */
+  --tertiary: #5B8AFF;
+  --tertiary-foreground: #F6F6F6;
   
-  --muted: #1E2538;
-  --muted-foreground: #8B92A8;
+  --muted: #001358;
+  --muted-foreground: #A1C5FF;
   --destructive: #FF3B3B;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.08);
@@ -39,16 +39,20 @@
   --switch-background: #2A3448;
   --font-weight-medium: 600;
   --font-weight-normal: 400;
-  --ring: #00D4E6;
-  --chart-1: #00D4E6;
-  --chart-2: #0891B2;
-  --chart-3: #0EA5E9;
-  --chart-4: #38BDF8;
-  --chart-5: #22D3EE;
+  --ring: #1C26E9;
+  --chart-1: #1C26E9;
+  --chart-2: #A1C5FF;
+  --chart-3: #5B8AFF;
+  --chart-4: #001358;
+  --chart-5: #161616;
+  /* Sección clara (ej. Servicios) */
+  --section-light: #F6F8FA;
+  --section-light-foreground: #0f172a;
+  --section-light-muted: #475569;
   --radius: 1rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
+  --sidebar-primary: #001358;
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
@@ -122,6 +126,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-section-light: var(--section-light);
+  --color-section-light-foreground: var(--section-light-foreground);
+  --color-section-light-muted: var(--section-light-muted);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -143,20 +150,20 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: #0A0E1A;
-    /* Background atmosférico con texturas y profundidad */
+    background-color: #000D2E;
+    /* Background atmosférico - colores branding R14 */
     background-image: 
-      /* Grain texture para sensación industrial */
+      /* Grain texture */
       url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"),
-      /* Patrón de grid sutil */
-      linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
-      /* Gradientes radiales para profundidad atmosférica */
-      radial-gradient(ellipse at 10% 20%, rgba(8, 145, 178, 0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(0, 212, 230, 0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 60%),
-      /* Base gradient oscuro */
-      linear-gradient(180deg, #0A0E1A 0%, #0D1B4D 50%, #0A0E1A 100%);
+      /* Patrón de grid sutil - azul claro para mejor contraste */
+      linear-gradient(90deg, rgba(161, 197, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(rgba(161, 197, 255, 0.04) 1px, transparent 1px),
+      /* Gradientes radiales - azul claro (evita azul sobre azul) */
+      radial-gradient(ellipse at 10% 20%, rgba(161, 197, 255, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(161, 197, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(0, 19, 88, 0.4) 0%, transparent 60%),
+      /* Base gradient - #001358 */
+      linear-gradient(180deg, #000D2E 0%, #001358 50%, #000D2E 100%);
     background-size: 
       400px 400px,
       60px 60px,
@@ -177,7 +184,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.08), transparent 40%);
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(161, 197, 255, 0.06), transparent 40%);
     pointer-events: none;
     z-index: 1;
     opacity: 0;

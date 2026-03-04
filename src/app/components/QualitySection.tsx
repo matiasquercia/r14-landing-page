@@ -30,7 +30,7 @@ export function QualitySection() {
   ];
 
   const colorMap = {
-    accent: { bg: 'bg-accent/20', icon: 'text-accent', border: 'border-accent/40' },
+    accent: { bg: 'bg-secondary/25', icon: 'text-secondary', border: 'border-secondary/40' },
     secondary: { bg: 'bg-secondary/20', icon: 'text-secondary', border: 'border-secondary/40' },
     tertiary: { bg: 'bg-tertiary/20', icon: 'text-tertiary', border: 'border-tertiary/40' },
   };
@@ -46,14 +46,14 @@ export function QualitySection() {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/90 to-background/95" />
       
       {/* Decorative elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title="Compromiso con la calidad y la seguridad alimentaria"
           subtitle="Desde la selección de materias primas hasta la entrega final, trabajamos con procesos optimizados que garantizan altos estándares de calidad y seguridad alimentaria."
-          className="mb-16 md:mb-20 [&_h2]:text-white [&_p]:text-white/90 [&_div]:bg-accent"
+          className="mb-16 md:mb-20 [&_h2]:text-white [&_p]:text-white/90 [&_div]:bg-secondary"
         />
 
         {/* Features Grid */}
@@ -91,9 +91,9 @@ export function QualitySection() {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative bg-white/10 backdrop-blur-xl border border-accent/30 p-12 md:p-16 rounded-3xl text-center mb-12 overflow-hidden group hover:border-accent/50 transition-all duration-500"
+          className="relative bg-white/10 backdrop-blur-xl border border-secondary/35 p-12 md:p-16 rounded-3xl text-center mb-12 overflow-hidden group hover:border-secondary/50 transition-all duration-500"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <p className="relative text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight leading-relaxed text-white">
             La seguridad alimentaria es parte central de nuestra forma de trabajar.
           </p>

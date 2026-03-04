@@ -1,4 +1,5 @@
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { imgNosotrosEquipo } from '@/assets/img';
 import { Award, CheckCircle, Shield, Users, Zap, Heart, Building2, GraduationCap, Briefcase } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 import { motion } from 'motion/react';
@@ -32,7 +33,7 @@ export function AboutSection() {
   ];
 
   const colorMap = {
-    accent: { bg: 'bg-accent/20', icon: 'text-accent', border: 'border-accent/30' },
+    accent: { bg: 'bg-secondary/25', icon: 'text-secondary', border: 'border-secondary/35' },
     secondary: { bg: 'bg-secondary/20', icon: 'text-secondary', border: 'border-secondary/30' },
     tertiary: { bg: 'bg-tertiary/20', icon: 'text-tertiary', border: 'border-tertiary/30' },
   };
@@ -44,7 +45,7 @@ export function AboutSection() {
     <section id="nosotros" className="relative py-32 scroll-mt-24 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 -right-40 w-[700px] h-[700px] bg-accent/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 -right-40 w-[700px] h-[700px] bg-secondary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -left-40 w-[700px] h-[700px] bg-secondary/5 rounded-full blur-3xl"></div>
       </div>
 
@@ -63,15 +64,15 @@ export function AboutSection() {
             style={noFlicker}
             className="space-y-6"
           >
-            <p className="text-lg md:text-xl leading-relaxed text-foreground/90 font-medium">
-              <span className="font-bold text-accent">Real de Catorce</span> nació como un pequeño servicio de catering y organización de eventos, 
+            <p className="text-sm md:text-base leading-relaxed text-foreground/90 font-medium">
+              <span className="font-bold text-secondary">Real de Catorce</span> nació como un pequeño servicio de catering y organización de eventos, 
               donde la dedicación y el amor por la buena comida marcaron sus primeros pasos.
             </p>
-            <p className="text-lg md:text-xl leading-relaxed text-foreground/90 font-medium">
+            <p className="text-sm md:text-base leading-relaxed text-foreground/90 font-medium">
               Con el tiempo, la experiencia adquirida impulsó una transformación profunda que dio lugar 
               a una empresa de logística alimentaria consolidada.
             </p>
-            <p className="text-lg md:text-xl leading-relaxed text-foreground/90 font-medium">
+            <p className="text-sm md:text-base leading-relaxed text-foreground/90 font-medium">
               Hoy nos especializamos en el abastecimiento y reparto diario de alimentos para organismos públicos, instituciones y empresas privadas, gestionando procesos que combinan frescura, seguridad, puntualidad y eficiencia. Contamos con la capacidad operativa y flexibilidad para adaptarnos a las particularidades de cada cliente.
             </p>
           </motion.div>
@@ -82,19 +83,19 @@ export function AboutSection() {
             viewport={viewport}
             transition={{ type: 'tween', duration: 0.8 }}
             style={noFlicker}
-            className="relative"
+            className="relative max-w-sm md:max-w-md mx-auto"
           >
             {/* Decorative frame */}
-            <div className="absolute -inset-4 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-3xl blur-2xl"></div>
+            <div className="absolute -inset-4 bg-gradient-to-br from-secondary/20 to-tertiary/20 rounded-3xl blur-2xl"></div>
             <div className="relative">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1707301280380-56f7e7a00aef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwbWVldGluZyUyMGJ1c2luZXNzfGVufDF8fHx8MTc2NzgwMjMyNnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Equipo de trabajo"
-                className="rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] w-full border-2 border-accent/20"
+                src={imgNosotrosEquipo}
+                alt="Equipo de trabajo Real de Catorce"
+                className="rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] w-full border-2 border-secondary/25 object-cover"
               />
               {/* Corner accent */}
-              <div className="absolute top-4 left-4 w-20 h-20 border-4 border-accent/50 rounded-tl-3xl"></div>
-              <div className="absolute bottom-4 right-4 w-20 h-20 border-4 border-secondary/50 rounded-br-3xl"></div>
+              <div className="absolute top-3 left-3 w-14 h-14 border-2 border-secondary/50 rounded-tl-2xl"></div>
+              <div className="absolute bottom-3 right-3 w-14 h-14 border-2 border-secondary/50 rounded-br-2xl"></div>
             </div>
           </motion.div>
         </div>
@@ -106,18 +107,18 @@ export function AboutSection() {
           viewport={viewport}
           transition={{ type: 'tween', duration: 0.8 }}
           style={noFlicker}
-          className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-accent/20 p-12 md:p-16 rounded-3xl text-center mb-20 overflow-hidden group hover:border-accent/40 transition-all duration-500"
+          className="relative bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-secondary/25 p-12 md:p-16 rounded-3xl text-center mb-20 overflow-hidden group hover:border-secondary/40 transition-all duration-500"
         >
           {/* Background glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-tertiary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
-          <p className="relative text-2xl md:text-3xl lg:text-4xl leading-relaxed text-foreground font-black uppercase tracking-tight">
+          <p className="relative text-base md:text-lg lg:text-xl leading-relaxed text-foreground font-black uppercase tracking-tight">
             Mantenemos vivo el espíritu que nos vio nacer, con una estructura moderna preparada para los desafíos actuales.
           </p>
 
           {/* Decorative quotes */}
-          <div className="absolute top-6 left-6 text-6xl text-accent/20 font-black">"</div>
-          <div className="absolute bottom-6 right-6 text-6xl text-secondary/20 font-black rotate-180">"</div>
+          <div className="absolute top-4 left-4 text-4xl text-secondary/25 font-black">"</div>
+          <div className="absolute bottom-4 right-4 text-4xl text-secondary/20 font-black rotate-180">"</div>
         </motion.div>
 
         {/* Values */}
@@ -128,7 +129,7 @@ export function AboutSection() {
             viewport={viewport}
             transition={{ type: 'tween', duration: 0.7 }}
             style={noFlicker}
-            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
+            className="text-xl md:text-2xl text-center mb-8 text-foreground font-black uppercase tracking-tight"
           >
             Nuestras fortalezas
           </motion.h3>
@@ -178,7 +179,7 @@ export function AboutSection() {
             viewport={viewport}
             transition={{ type: 'tween', duration: 0.7 }}
             style={noFlicker}
-            className="text-3xl md:text-4xl text-center mb-12 text-foreground font-black uppercase tracking-tight"
+            className="text-xl md:text-2xl text-center mb-8 text-foreground font-black uppercase tracking-tight"
           >
             Trabajamos con distintos sectores
           </motion.h3>
@@ -211,7 +212,7 @@ export function AboutSection() {
                   >
                     <Icon className={`w-10 h-10 ${colors.icon}`} />
                   </motion.div>
-                  <span className="text-lg font-black text-foreground uppercase tracking-wide">
+                  <span className="text-sm font-black text-foreground uppercase tracking-wide">
                     {client.label}
                   </span>
                 </motion.div>
