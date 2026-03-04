@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+﻿import { useState, FormEvent } from 'react';
 import { Mail, MapPin, Send, CheckCircle, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
@@ -91,7 +91,7 @@ export function ContactSection() {
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title="Contacto institucional"
-          subtitle="Nuestro equipo est?? disponible para responder consultas y brindar informaci??n sobre nuestros servicios."
+          subtitle="Nuestro equipo está disponible para responder consultas y brindar información sobre nuestros servicios."
           className="mb-12 [&_h2]:text-white [&_p]:text-white/80"
         />
 
