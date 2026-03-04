@@ -8,7 +8,7 @@ interface FooterProps {
 
 export function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const viewport = { once: true, amount: 0.15 } as const;
+  const viewport = { once: true, amount: 0.05, margin: '0px 0px 80px 0px' } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   const quickLinks = [

@@ -58,7 +58,7 @@ export function ValueProposition() {
     },
   };
 
-  const viewport = { once: true, amount: 0.15 } as const;
+  const viewport = { once: true, amount: 0.05, margin: '0px 0px 80px 0px' } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   return (
@@ -115,7 +115,7 @@ export function ValueProposition() {
                 
                 <motion.div 
                   whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  transition={{ rotate: { duration: 0.6, ease: "easeInOut" }, scale: { duration: 0.3 } }}
                   className={`w-16 h-16 ${colors.bg} border-2 ${colors.border} rounded-2xl flex items-center justify-center mb-6 relative z-10`}
                 >
                   <Icon className={`w-8 h-8 ${colors.icon}`} />
@@ -129,9 +129,9 @@ export function ValueProposition() {
                   {item.description}
                 </p>
 
-                {/* Animated border glow on hover */}
+                {/* Animated border glow on hover - sin animate-pulse para evitar parpadeo en móvil */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div className={`absolute inset-0 rounded-2xl border-2 ${colors.border} animate-pulse`}></div>
+                  <div className={`absolute inset-0 rounded-2xl border-2 ${colors.border}`}></div>
                 </div>
               </motion.div>
             );

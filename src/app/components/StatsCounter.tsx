@@ -50,8 +50,8 @@ function AnimatedNumber({ value, suffix = '', prefix = '', isInView }: { value: 
 
 export function StatsCounter() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const viewport = { once: true, amount: 0.2 } as const;
+  const isInView = useInView(ref, { once: true, amount: 0.05, margin: '0px 0px 80px 0px' });
+  const viewport = { once: true, amount: 0.05, margin: '0px 0px 80px 0px' } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   return (

@@ -35,7 +35,7 @@ export function ClientsSection() {
     tertiary: { gradient: 'from-tertiary/30 to-tertiary/10', border: 'border-tertiary/30', text: 'text-tertiary' },
   };
 
-  const viewport = { once: true, amount: 0.15 } as const;
+  const viewport = { once: true, amount: 0.05, margin: '0px 0px 80px 0px' } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   return (

@@ -37,7 +37,7 @@ export function FAQSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const viewport = { once: true, amount: 0.15 } as const;
+  const viewport = { once: true, amount: 0.05, margin: '0px 0px 80px 0px' } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   return (

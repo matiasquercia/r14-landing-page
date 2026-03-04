@@ -67,8 +67,9 @@ export function QualitySection() {
                 key={index}
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.05, margin: '0px 0px 80px 0px' }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                style={{ backfaceVisibility: 'hidden' }}
                 whileHover={{ y: -10, scale: 1.05 }}
                 className={`flex flex-col items-center text-center p-8 bg-white/10 backdrop-blur-md border ${colors.border} rounded-2xl hover:bg-white/15 transition-all duration-300 group`}
               >
@@ -89,8 +90,9 @@ export function QualitySection() {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05, margin: '0px 0px 80px 0px' }}
           transition={{ duration: 0.8 }}
+          style={{ backfaceVisibility: 'hidden' }}
           className="relative bg-white/10 backdrop-blur-xl border border-secondary/35 p-12 md:p-16 rounded-3xl text-center mb-12 overflow-hidden group hover:border-secondary/50 transition-all duration-500"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -103,8 +105,9 @@ export function QualitySection() {
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05, margin: '0px 0px 80px 0px' }}
           transition={{ duration: 0.7, delay: 0.3 }}
+          style={{ backfaceVisibility: 'hidden' }}
           className="max-w-3xl mx-auto text-center"
         >
           <p className="text-lg md:text-xl leading-relaxed text-white/80 font-medium">

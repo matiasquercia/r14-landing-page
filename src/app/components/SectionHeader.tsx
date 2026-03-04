@@ -25,7 +25,7 @@ export function SectionHeader({
     ? 'text-sm md:text-base leading-relaxed text-section-light-muted font-medium'
     : 'text-sm md:text-base leading-relaxed text-muted-foreground font-medium';
 
-  const viewport = { once: true, amount: 0.15 } as const;
+  const viewport = { once: true, amount: 0.05, margin: '0px 0px 80px 0px' } as const;
   const noFlicker = { backfaceVisibility: 'hidden' as const };
 
   return (
