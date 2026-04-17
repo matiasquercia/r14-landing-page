@@ -1,4 +1,5 @@
-import { Check, Shield, ClipboardCheck, TrendingUp, FileCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Check, Shield, ClipboardCheck, TrendingUp, FileCheck, ArrowRight } from 'lucide-react';
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
 import { SectionDivider } from './SectionDivider';
@@ -199,15 +200,22 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
           </p>
         </motion.div>
 
-        {/* CTA */}
+        {/* CTA: enlace a Calidad + consulta servicios */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={viewport}
-          transition={{ type: 'tween', duration: 0.7, delay: 0.3 }}
+          transition={{ type: 'tween', duration: 0.7, delay: 0.2 }}
           style={noFlicker}
-          className="text-center"
+          className="flex flex-col items-center justify-center gap-5 text-center"
         >
+          <Link
+            to="/calidad"
+            className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-white/90 px-5 py-3 text-xs font-bold uppercase tracking-wide text-primary shadow-sm backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-white hover:shadow-md"
+          >
+            Calidad y Procesos
+            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+          </Link>
           <Button variant="primary" size="lg" onClick={() => onNavigate('contacto')}>
             Consultar por nuestros servicios
           </Button>

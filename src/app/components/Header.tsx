@@ -1,5 +1,6 @@
 import { Mail, MapPin, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import logoImgWhite from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_01_blanco.png";
 
@@ -8,14 +9,28 @@ interface HeaderProps {
 }
 
 export function Header({ onNavigate }: HeaderProps) {
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showLogo, setShowLogo] = useState(false);
+  const [logoFromScroll, setLogoFromScroll] = useState(false);
+
+  const isSubPage = location.pathname !== '/';
+  /**
+   * Sin entrada animada en subrutas (p. ej. /calidad) ni al volver desde Calidad a inicio
+   * (state.skipHeaderEntrance). Se fija solo en el primer montaje para que limpiar el state
+   * en HomePage no reactive el stagger.
+   */
+  const [skipEntrance] = useState(() => {
+    if (location.pathname !== '/') return true;
+    return Boolean((location.state as { skipHeaderEntrance?: boolean } | null)?.skipHeaderEntrance);
+  });
+  const navSolid = isScrolled || isSubPage;
+  const showLogo = isSubPage || logoFromScroll;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      setShowLogo(window.scrollY > 350);
+      setLogoFromScroll(window.scrollY > 350);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -27,26 +42,27 @@ export function Header({ onNavigate }: HeaderProps) {
     { id: 'home', label: 'Inicio' },
     { id: 'servicios', label: 'Servicios' },
     { id: 'nosotros', label: 'Nosotros' },
+    { id: 'calidad', label: 'Calidad' },
     { id: 'faq', label: 'FAQ' },
     { id: 'contacto', label: 'Contacto' },
   ];
 
   const handleNavClick = (sectionId: string) => {
-    onNavigate(sectionId);
     setIsMenuOpen(false);
+    onNavigate(sectionId);
   };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'shadow-[0_10px_40px_rgba(0,0,0,0.5)]' : ''
+      navSolid ? 'shadow-[0_10px_40px_rgba(0,0,0,0.5)]' : ''
     }`}>
       {/* Top bar */}
       <motion.div 
-        initial={{ y: -100 }}
+        initial={skipEntrance ? false : { y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={skipEntrance ? { duration: 0 } : { duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`transition-all duration-300 ${
-          isScrolled 
+          navSolid 
             ? 'bg-primary/95 backdrop-blur-xl border-b border-secondary/25' 
             : 'bg-primary/80 backdrop-blur-md'
         }`}
@@ -96,7 +112,7 @@ export function Header({ onNavigate }: HeaderProps) {
 
       {/* Main navigation */}
       <div className={`transition-all duration-500 ${
-        isScrolled 
+        navSolid 
           ? 'bg-background/98 backdrop-blur-2xl border-b border-secondary/15' 
           : 'bg-transparent'
       }`}>
@@ -106,10 +122,10 @@ export function Header({ onNavigate }: HeaderProps) {
             <AnimatePresence>
               {showLogo && (
                 <motion.button
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={skipEntrance ? false : { opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  transition={skipEntrance ? { duration: 0 } : { duration: 0.3 }}
                   onClick={() => handleNavClick('home')}
                   className="flex items-center hover:scale-105 transition-transform"
                 >
@@ -127,12 +143,14 @@ export function Header({ onNavigate }: HeaderProps) {
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.id}
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={skipEntrance ? false : { opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  transition={
+                    skipEntrance ? { duration: 0 } : { duration: 0.4, delay: index * 0.05 }
+                  }
                   onClick={() => handleNavClick(item.id)}
                   className={`px-4 py-2 rounded-lg transition-all duration-300 font-bold text-sm uppercase tracking-wider relative group ${
-                    isScrolled 
+                    navSolid 
                       ? 'text-foreground hover:text-secondary' 
                       : 'text-white hover:text-secondary'
                   }`}
@@ -147,7 +165,7 @@ export function Header({ onNavigate }: HeaderProps) {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`lg:hidden p-3 rounded-xl transition-all duration-300 ml-auto ${
-                isScrolled 
+                navSolid 
                   ? 'text-foreground hover:bg-secondary/15 hover:text-secondary' 
                   : 'text-white hover:bg-white/10 hover:text-secondary'
               }`}
@@ -188,7 +206,7 @@ export function Header({ onNavigate }: HeaderProps) {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 className={`lg:hidden overflow-hidden border-t ${
-                  isScrolled 
+                  navSolid 
                     ? 'border-secondary/15 bg-card/95 backdrop-blur-xl' 
                     : 'border-white/10 bg-primary/90 backdrop-blur-md'
                 }`}
@@ -197,12 +215,14 @@ export function Header({ onNavigate }: HeaderProps) {
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
-                      initial={{ x: -20, opacity: 0 }}
+                      initial={skipEntrance ? false : { x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      transition={
+                        skipEntrance ? { duration: 0 } : { duration: 0.3, delay: index * 0.05 }
+                      }
                       onClick={() => handleNavClick(item.id)}
                       className={`text-left py-3 px-4 transition-all duration-300 rounded-lg font-bold uppercase tracking-wider text-sm ${
-                        isScrolled 
+                        navSolid 
                           ? 'text-foreground hover:text-secondary hover:bg-secondary/15 hover:translate-x-2' 
                           : 'text-white hover:text-secondary hover:bg-white/10 hover:translate-x-2'
                       }`}

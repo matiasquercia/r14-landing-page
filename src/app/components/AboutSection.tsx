@@ -78,21 +78,27 @@ export function AboutSection() {
           </motion.div>
           
           <motion.div
-            initial={{ x: 50, opacity: 0 }}
+            initial={{ x: 36, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={viewport}
-            transition={{ type: 'tween', duration: 0.8 }}
+            transition={{ type: 'tween', duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
             style={noFlicker}
-            className="relative max-w-sm md:max-w-md mx-auto"
+            className="group relative mx-auto w-full overflow-visible md:max-w-lg motion-reduce:transition-none"
           >
-            {/* Decorative frame */}
-            <div className="absolute -inset-4 bg-gradient-to-br from-secondary/20 to-tertiary/20 rounded-3xl blur-2xl"></div>
-            <div className="relative">
-              <ImageWithFallback
-                src={imgNosotrosEquipo}
-                alt="Equipo de trabajo Real de Catorce"
-                className="rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] w-full border-2 border-secondary/25 object-cover"
-              />
+            {/* Halo detrás — casi imperceptible al hover (misma duración que el marco) */}
+            <div className="pointer-events-none absolute -inset-8 bg-gradient-to-br from-secondary/25 via-secondary/5 to-tertiary/30 opacity-80 blur-3xl transition-[opacity,transform] duration-[1.35s] ease-in-out motion-reduce:transition-none group-hover:opacity-[0.88] group-hover:scale-[1.006] rounded-2xl md:rounded-[2rem]" />
+            <div className="pointer-events-none absolute -inset-3 bg-gradient-to-tr from-tertiary/15 to-transparent blur-2xl rounded-2xl md:rounded-3xl" />
+
+            <div
+              className="relative translate-y-0 rounded-2xl bg-gradient-to-br from-secondary/55 via-white/12 to-tertiary/50 p-px shadow-[0_28px_64px_-14px_rgba(8,15,35,0.55),0_0_48px_-12px_rgba(120,170,255,0.22)] transition-[transform,box-shadow] duration-[1.35s] ease-in-out motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:shadow-[0_30px_66px_-14px_rgba(8,15,35,0.56),0_0_50px_-11px_rgba(125,175,255,0.235)] md:rounded-3xl md:p-[2px]"
+            >
+              <div className="overflow-hidden rounded-[0.9375rem] bg-primary/30 md:rounded-[1.4rem]">
+                <ImageWithFallback
+                  src={imgNosotrosEquipo}
+                  alt="Equipo de trabajo Real de Catorce"
+                  className="w-full object-cover rounded-[0.9375rem] md:rounded-[1.4rem]"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

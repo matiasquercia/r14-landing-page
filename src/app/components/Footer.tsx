@@ -13,17 +13,18 @@ export function Footer({ onNavigate }: FooterProps) {
 
   const quickLinks = [
     { id: 'nosotros', label: 'Nosotros' },
+    { id: 'calidad', label: 'Calidad' },
     { id: 'servicios', label: 'Servicios' },
     { id: 'faq', label: 'FAQ' },
     { id: 'contacto', label: 'Contacto' },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-primary via-primary to-background border-t border-secondary/15 overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+    <footer className="relative overflow-hidden border-t border-secondary/15 bg-background/98 backdrop-blur-2xl shadow-[0_-12px_40px_rgba(0,0,0,0.35)]">
+      {/* Misma familia visual que el header al scroll (barra principal) */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
@@ -141,7 +142,7 @@ export function Footer({ onNavigate }: FooterProps) {
           viewport={viewport}
           transition={{ type: 'tween', duration: 0.7, delay: 0.3 }}
           style={noFlicker}
-          className="border-t border-white/10 pt-8 text-center"
+          className="border-t border-secondary/15 pt-8 text-center"
         >
           <p className="text-sm text-white/60 font-medium">
             © {currentYear} <span className="text-secondary font-bold">Real de Catorce</span> – Todos los derechos reservados.
@@ -149,8 +150,7 @@ export function Footer({ onNavigate }: FooterProps) {
         </motion.div>
       </div>
 
-      {/* Decorative bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-tertiary to-secondary"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-secondary/25" aria-hidden />
     </footer>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 import { SectionDivider } from './SectionDivider';
 import { motion, AnimatePresence } from 'motion/react';
@@ -16,12 +16,27 @@ export function FAQSection() {
       answer: 'Brindamos servicios integrales de logística y abastecimiento alimentario, incluyendo la provisión de alimentos envasados, frescos y congelados, elaboración de viandas y distribución diaria adaptada a cada operación.',
     },
     {
+      question: '¿Qué tipos de alimentos comercializan?',
+      answer:
+        'Ofrecemos alimentos envasados, productos frescos y productos congelados. Además, elaboramos viandas alimenticias con enfoque nutricional y procesos de producción controlados.',
+    },
+    {
       question: '¿Cómo garantizan la calidad y la seguridad alimentaria?',
       answer: 'Nuestra operatoria se basa en procesos controlados en todas las etapas: selección de materias primas, almacenamiento, elaboración y distribución. Aplicamos controles internos, mejora continua y cumplimiento de la normativa vigente, priorizando la seguridad alimentaria, la frescura y la calidad de los productos.',
     },
     {
+      question: '¿Ofrecen otras soluciones empresariales?',
+      answer:
+        'Sí. Además de nuestros servicios principales, en Real de Catorce desarrollamos soluciones empresariales adaptadas a requerimientos específicos, que se evalúan de manera personalizada según las necesidades de cada organización. Para más información, te invitamos a contactarnos a través de nuestros canales institucionales.',
+    },
+    {
       question: '¿Con qué tipo de clientes trabajan?',
       answer: 'Trabajamos principalmente con organismos públicos, instituciones y empresas privadas que requieren soluciones confiables de logística alimentaria, cumpliendo con estándares de calidad, seguridad y puntualidad.',
+    },
+    {
+      question: '¿Cuentan con capacidad para operaciones de gran volumen?',
+      answer:
+        'Sí. Contamos con una estructura operativa preparada para abastecer operaciones de distinto volumen, manteniendo flexibilidad, eficiencia y cumplimiento de los plazos establecidos.',
     },
     {
       question: '¿En qué zonas operan?',
@@ -31,6 +46,16 @@ export function FAQSection() {
     {
       question: '¿Cómo puedo realizar una consulta o solicitar información?',
       answer: 'Podés comunicarte a través de nuestros correos institucionales o completar el formulario de contacto disponible en el sitio. Nuestro equipo responderá a la brevedad.',
+    },
+    {
+      question: '¿Realizan servicios personalizados?',
+      answer:
+        'Sí. Analizamos cada requerimiento de forma particular para ofrecer soluciones acordes a las necesidades operativas, logísticas y nutricionales de cada cliente.',
+    },
+    {
+      question: '¿Realizan servicios para eventos especiales?',
+      answer:
+        'Sí. Contamos con experiencia en eventos especiales y servicios de catering, adaptando la logística y el abastecimiento a las características de cada ocasión.',
     },
   ];
 
@@ -72,7 +97,7 @@ export function FAQSection() {
             
             return (
               <motion.div
-                key={index}
+                key={faq.question}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={viewport}
