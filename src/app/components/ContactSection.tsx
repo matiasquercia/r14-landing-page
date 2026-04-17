@@ -99,8 +99,8 @@ export function ContactSection() {
           {/* Left Column: Contact Info + Maps */}
           <div className="flex flex-col gap-6">
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-              <h3 className="mb-4 flex items-center gap-2 text-white">
-                <Mail className="w-5 h-5 text-secondary" />
+              <h3 className="mb-4 flex items-center gap-2 text-base font-bold text-white font-sans tracking-normal">
+                <Mail className="w-5 h-5 shrink-0 text-secondary" aria-hidden />
                 Contactanos
               </h3>
               <div className="space-y-2 pl-8">
@@ -138,8 +138,8 @@ export function ContactSection() {
 
             {/* Maps */}
             <div className="flex flex-col flex-grow bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-              <h3 className="mb-4 flex items-center gap-2 text-white">
-                <MapPin className="w-5 h-5 text-secondary" />
+              <h3 className="mb-4 flex items-center gap-2 text-base font-bold text-white font-sans tracking-normal">
+                <MapPin className="w-5 h-5 shrink-0 text-secondary" aria-hidden />
                 Nuestras ubicaciones
               </h3>
               <div className="flex flex-col gap-4 flex-grow">
@@ -177,7 +177,7 @@ export function ContactSection() {
 
           {/* Right Column: Contact Form */}
           <div className="flex flex-col bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 md:p-8">
-            <h3 className="mb-4 text-base font-bold text-white">Enviar consulta</h3>
+            <h3 className="mb-4 text-base font-bold text-white font-sans tracking-normal">Enviar consulta</h3>
             
             {submitted ? (
               <div className="flex-grow flex flex-col items-center justify-center text-center p-6">

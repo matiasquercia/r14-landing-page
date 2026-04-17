@@ -3,20 +3,12 @@ import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
 import { SectionDivider } from './SectionDivider';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { ServiceCardCarousel } from './ServiceCardCarousel';
 import {
   imgEnvasados,
   imgMilanesa,
-  imgMilanesa2,
-  imgLentejas,
-  imgEnsalada,
-  imgPersona1,
-  imgPersona2,
   imgOficina,
 } from '@/assets/img';
 import { motion } from 'motion/react';
-
-const IMG_VIANDAS = [imgMilanesa, imgLentejas, imgMilanesa2, imgEnsalada, imgPersona1, imgPersona2];
 
 interface ServicesSectionProps {
   onNavigate: (section: string) => void;
@@ -39,7 +31,7 @@ const steps = [
     title: 'Viandas alimenticias',
     description: 'Elaboración de viandas con enfoque nutricional, frescura garantizada y producción controlada.',
     items: ['Elaboración de viandas', 'Enfoque nutricional', 'Frescura garantizada', 'Producción controlada'],
-    images: IMG_VIANDAS,
+    image: imgMilanesa,
     imageFirst: false,
     accentColor: 'secondary' as const,
   },
@@ -110,7 +102,6 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
           {steps.map((step, index) => {
             const styles = accentStyles[step.accentColor];
             const isImageFirst = step.imageFirst;
-            const hasCarousel = 'images' in step;
 
             return (
               <motion.div
@@ -161,25 +152,16 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
                     isImageFirst ? 'md:order-1' : 'md:order-2'
                   }`}
                 >
-                  {hasCarousel ? (
-                    <ServiceCardCarousel
-                      images={step.images}
+                  <div className="relative w-full h-full min-h-[280px]">
+                    <ImageWithFallback
+                      src={step.image}
                       alt={step.title}
-                      gradientClass={styles.gradient}
-                      className="h-full min-h-[280px]"
+                      className="w-full h-full object-cover"
                     />
-                  ) : (
-                    <div className="relative w-full h-full min-h-[280px]">
-                      <ImageWithFallback
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${styles.gradient} mix-blend-multiply opacity-40`}
-                      />
-                    </div>
-                  )}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${styles.gradient} mix-blend-multiply opacity-40`}
+                    />
+                  </div>
                 </div>
               </motion.div>
             );

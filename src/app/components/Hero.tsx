@@ -1,6 +1,6 @@
 import { Button } from './Button';
 import logoImg from "@/assets/logo/RGB/300 ppi/branding_realdecatorce_Logo_02_blanco.png";
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 
 interface HeroProps {
@@ -10,34 +10,49 @@ interface HeroProps {
 // Video de fondo - Archivo local en public/hero-video.mp4
 const HERO_VIDEO_URL = "/hero-video.mp4";
 
-// Imagen de fallback mientras carga el video
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1592085198739-ffcad7f36b54?auto=format&fit=crop&w=1920&q=80";
-
 export function Hero({ onNavigate }: HeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
-    // Asegurar que el video se reproduzca
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Algunos navegadores bloquean autoplay, ignorar el error
+    const el = videoRef.current;
+    if (!el) return;
+
+    const tryPlay = () => {
+      el.play().catch(() => {
+        // Autoplay bloqueado u otro error: el fondo sólido sigue cubriendo
       });
+    };
+
+    // Si el navegador ya tiene datos en caché, puede estar listo antes de registrar listeners
+    if (el.readyState >= 3) {
+      setVideoReady(true);
+      tryPlay();
+      return;
     }
+
+    const onReady = () => {
+      setVideoReady(true);
+      tryPlay();
+    };
+
+    el.addEventListener('canplay', onReady, { once: true });
+
+    return () => {
+      el.removeEventListener('canplay', onReady);
+    };
   }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-28 pb-24 md:pb-28">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
-        {/* Fallback image (se muestra mientras carga el video) */}
-        <img 
-          src={FALLBACK_IMAGE}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          aria-hidden="true"
+        {/* Capa base (misma familia cromática que el overlay) — evita flash de imagen ajena al video */}
+        <div
+          className="absolute inset-0 bg-primary bg-gradient-to-br from-[#000D2E] via-primary to-[#000b24]"
+          aria-hidden
         />
-        
-        {/* Video */}
+
         <video
           ref={videoRef}
           autoPlay
@@ -45,8 +60,9 @@ export function Hero({ onNavigate }: HeroProps) {
           loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          poster={FALLBACK_IMAGE}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
+            videoReady ? 'opacity-100' : 'opacity-0'
+          }`}
         >
           <source src={HERO_VIDEO_URL} type="video/mp4" />
         </video>

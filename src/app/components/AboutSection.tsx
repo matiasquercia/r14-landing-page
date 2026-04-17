@@ -93,9 +93,6 @@ export function AboutSection() {
                 alt="Equipo de trabajo Real de Catorce"
                 className="rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] w-full border-2 border-secondary/25 object-cover"
               />
-              {/* Corner accent */}
-              <div className="absolute top-3 left-3 w-14 h-14 border-2 border-secondary/50 rounded-tl-2xl"></div>
-              <div className="absolute bottom-3 right-3 w-14 h-14 border-2 border-secondary/50 rounded-br-2xl"></div>
             </div>
           </motion.div>
         </div>
@@ -131,7 +128,7 @@ export function AboutSection() {
             style={noFlicker}
             className="text-xl md:text-2xl text-center mb-8 text-foreground font-black uppercase tracking-tight"
           >
-            Nuestras fortalezas
+            Nuestros valores
           </motion.h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">

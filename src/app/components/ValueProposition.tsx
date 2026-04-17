@@ -27,8 +27,9 @@ export function ValueProposition() {
     },
     {
       icon: MapPin,
-      title: 'Cobertura regional',
-      description: 'Operamos en Buenos Aires con logística optimizada para cada zona.',
+      title: 'Cobertura nacional',
+      description:
+        'Brindamos servicios en todo el territorio argentino, con una operatoria logística adaptada a los requerimientos específicos de cada servicio.',
       color: 'accent',
       delay: 0.4,
     },

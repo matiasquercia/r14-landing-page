@@ -25,7 +25,8 @@ export function FAQSection() {
     },
     {
       question: '¿En qué zonas operan?',
-      answer: 'Operamos principalmente en la Provincia de Buenos Aires, con capacidad logística para adaptarnos a distintos puntos de entrega según las necesidades del servicio.',
+      answer:
+        'Nuestra operatoria es de alcance nacional, con capacidad para cubrir distintos puntos del país según los requerimientos de cada servicio.',
     },
     {
       question: '¿Cómo puedo realizar una consulta o solicitar información?',
