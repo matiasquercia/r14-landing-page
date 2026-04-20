@@ -124,10 +124,7 @@ export function CalidadPage() {
             >
               <div className="mx-auto mb-8 max-w-3xl text-center md:mb-10">
                 <h2 className="font-black text-xl uppercase leading-snug tracking-tight text-white text-balance sm:text-2xl md:text-3xl lg:text-4xl">
-                  Nuestra gestión se apoya en{' '}
-                  <span className="text-accent [text-shadow:0_0_36px_color-mix(in_srgb,var(--accent)_50%,transparent)]">
-                    cuatro pilares
-                  </span>
+                  Nuestra gestión se apoya en <strong>cuatro pilares</strong>
                 </h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm font-medium leading-relaxed text-white/75 md:text-base">
                   Son la base de cada decisión operativa y de{' '}
